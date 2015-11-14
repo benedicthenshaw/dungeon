@@ -1,4 +1,4 @@
-// dungeon.pde : entry point; pre-load; main loop
+// main.pde : entry point; pre-load; main loop
 
 class Entity {}
 
