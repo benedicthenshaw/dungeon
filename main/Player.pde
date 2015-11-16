@@ -17,13 +17,8 @@ class Player extends Dynamic {
         this.inventory = new Item[INVENTORY_SIZE];
     }
 
-    void takeTurn(Grid g) {
+    void takeTurn(Grid grid) {
 
-    }
-
-    // move player to given point in grid
-    void move(int x, int y, Grid grid) {
-        grid.data[x][y].onEnter(this);
     }
 
     // take and act on player input for movement
