@@ -1,4 +1,2 @@
 # Dungeon Cleaner
-
-Games Programming BSc project
-Nov - Dec 2015
+Games Programming BSc project (Nov - Dec 2015)
