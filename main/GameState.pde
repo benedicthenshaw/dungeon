@@ -48,10 +48,16 @@ class Game extends GameState {
         this.level.placePathLine(19, 16, 50, 16);
         this.level.placePathLine(33, 16, 33, 30);
 
+        this.level.placePlayer(12, 7, new Player(10, 1));
+        this.level.placeEnemy(17, 22, new Enemy(10, 1));
+        this.level.placeItem(17, 7, new HealthPotion());
+
         println("Loaded Game");
     }
 
-    void update() {}
+    void update() {
+        takeKeyboardInput(this.level);
+    }
 
     void draw() {
         background(30, 30, 30);

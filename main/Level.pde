@@ -3,9 +3,13 @@
 // layout/generation for levels
 class Level {
     Grid grid;
+    ArrayList<Enemy> enemies;
+    Player player;
 
     Level(int gridWidth, int gridHeight, int screenWidth, int screenHeight) {
         this.grid = new Grid(gridWidth, gridHeight, screenWidth, screenHeight);
+        this.enemies = new ArrayList<Enemy>();
+        this.player = null;
     }
 
     // TODO: get tile type from parameters
@@ -31,7 +35,7 @@ class Level {
         }
     }
 
-    // places tile of a path
+    // places one tile of a path
     void placePathStep(int x, int y) {
         // TODO: paths need walls
         this.grid.setTile(x, y, new StoneFloor());
@@ -50,6 +54,34 @@ class Level {
             }
         }
     }
+
+    void placeItem(int x, int y, Item i) {
+        this.grid.placeItem(x, y, i);
+    }
+
+    void placeEnemy(int x, int y, Enemy d) {
+        this.enemies.add(d);
+        this.grid.placeDynamic(x, y, d);
+    }
+
+    void placePlayer(int x, int y, Player p) {
+        this.player = p;
+        this.grid.placeDynamic(x, y, p);
+    }
+
+    // carry out tasks that cause changes to the level
+    // takes a player action; occurs on key press
+    void performTurn(int action) {
+        // status update
+        println("Something happened!");
+        // enemy turns
+        for (Enemy e : this.enemies) {
+            e.takeTurn();
+        }
+        // player turn
+        this.player.takeTurn(action);
+    }
+
 
     // draw level grid
     void draw() {
