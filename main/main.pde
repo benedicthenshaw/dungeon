@@ -9,7 +9,7 @@ GameState state = null;
 void setup() {
     fullScreen();
     noStroke();
-    
+
     menu.load();
     game.load();
     state = game;
