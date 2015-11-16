@@ -22,23 +22,29 @@ class Tile extends Entity {
         this.item = t.item;
         this.dyn = t.dyn;
     }
-    
-    // called when player attempts to walk onto tile (overloaded in subclass)
-    void onEnter(Dynamic p) {}
-    
-    // called when player presses interact next to tile (overloaded in subclass)
-    void onInteract(Dynamic p) {}
-    
+
+    // called when entity attempts to walk onto tile (overloaded in subclass)
+    // return false when nothing occured
+    boolean onEnter(Dynamic p) {
+        return false;
+    }
+
+    // called when entity presses interact next to tile (overloaded in subclass)
+    // return false when nothing occured
+    boolean onInteract(Dynamic p) {
+        return false;
+    }
+
     // display tile (overloaded in subclass)
     void draw(int x, int y, int size) {}
 
     // draws entities on this tile
     void drawContents(int x, int y, int size) {
         if (this.item != null) {
-            // this.item.draw(x, y, size);
+            this.item.draw(x, y, size);
         }
         if (this.dyn != null) {
-            // this.dyn.draw(x, y, size);
+            this.dyn.draw(x, y, size);
         }
     }
 }
@@ -47,17 +53,18 @@ class Tile extends Entity {
 
 class Floor extends Tile {
     // move to tile if empty
-    void onEnter(Dynamic p) {
+    boolean onEnter(Dynamic p) {
         if (this.dyn == null){
             this.dyn = p;
         }
+        return true;
     }
 }
 
 class StoneFloor extends Floor {
     void draw(int x, int y, int size) {
         fill(80,80,80);
-        rect(x, y, size, size, 5);
+        rect(x, y, size, size);
         this.drawContents(x, y, size);
     }
 }
@@ -66,10 +73,10 @@ class StoneFloor extends Floor {
 
 class Wall extends Tile {}
 
-class StoneWall extends Tile {
+class StoneWall extends Wall {
     void draw(int x, int y, int size) {
         fill(180, 180, 180);
-        rect(x, y, size, size, 5);
+        rect(x, y, size, size);
         this.drawContents(x, y, size);
     }
 }

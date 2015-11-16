@@ -3,10 +3,30 @@
 // superclass for items
 class Item extends Entity {
     void onConsume(Player p) {}
+
+    void draw(int x, int y, int size) {}
+}
+
+class LootBag extends Item {
+    ArrayList<Item> items;
+
+    LootBag(Item... i) {
+        this.items = new ArrayList<Item>();
+        for (Item item : i) {
+            this.items.add(item);
+        }
+    }
 }
 
 ///// CONSUMABLES /////
 
-class Potion extends Item {
-    
+class HealthPotion extends Item {
+    void onConsume(Player p) {
+        p.health += 1;
+    }
+
+    void draw(int x, int y, int size) {
+        fill(50, 50, 255);
+        ellipse(x + size/4, y + size/4, size/2, size/2);
+    }
 }

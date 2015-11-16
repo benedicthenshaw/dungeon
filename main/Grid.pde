@@ -77,13 +77,13 @@ class Grid {
                        y * this.tileSize + gridOffsetY,
                        this.tileSize);
             }
-
             // DEBUG: draw grid lines
-            stroke(0);
+            stroke(0, 0, 0, 50);
             noFill();
             rect(x * this.tileSize + gridOffsetX,
                  y * this.tileSize + gridOffsetY,
                  this.tileSize, this.tileSize);
+            noStroke();
         }
     }
 
