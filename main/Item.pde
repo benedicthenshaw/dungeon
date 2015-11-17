@@ -1,7 +1,7 @@
 // Item.pde : superclass; all game items
 
 // superclass for items
-class Item extends Entity {
+class Item {
     void onConsume(Player p) {}
 
     void draw(int x, int y, int size) {}

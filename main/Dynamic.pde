@@ -1,7 +1,15 @@
 // Dynamic.pde : superclass
 
 // superclass for entities that take gameplay turns
-class Dynamic extends Entity {
+class Dynamic {
+    int x;
+    int y;
+
+    Dynamic(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
     // performs actions required each turn (overloaded in subclass)
     void takeTurn() {}
 

@@ -1,7 +1,5 @@
 // main.pde : entry point; pre-load; main loop
 
-class Entity {}
-
 Menu menu = new Menu();
 Game game = new Game();
 GameState state = null;
