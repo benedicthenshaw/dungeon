@@ -7,14 +7,14 @@ class Player extends Dynamic {
     int damage;
     Item inventory[];
 
-    Player(int health, int damage) {
+    Player(int x, int y, int health, int damage) {
+        super(x, y);
         this.health = health;
         this.damage = damage;
         this.inventory = new Item[INVENTORY_SIZE];
     }
 
     void takeTurn(int action) {
-
         println("Player did something!");
     }
 

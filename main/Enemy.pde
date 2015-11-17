@@ -4,7 +4,8 @@ class Enemy extends Dynamic {
     int health;
     int damage;
 
-    Enemy(int health, int damage) {
+    Enemy(int x, int y, int health, int damage) {
+        super(x, y);
         this.health = health;
         this.damage = damage;
     }

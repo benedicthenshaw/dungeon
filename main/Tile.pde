@@ -1,7 +1,7 @@
 // Tile.pde : superclass; all game tiles
 
 // Tile --- superclass of all tiles
-class Tile extends Entity {
+class Tile {
     // item sitting on this tile
     Item item;
     // enemy, player, etc. on this tile
