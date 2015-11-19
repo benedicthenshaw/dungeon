@@ -50,6 +50,10 @@ class Game extends GameState {
 
         this.level.placePlayer(12, 7, new Player(12, 7, 10, 1));
         this.level.placeEnemy(17, 22, new Enemy(17, 22, 10, 1));
+        this.level.placeEnemy(52, 12, new Enemy(52, 12, 10, 1));
+        this.level.placeEnemy(58, 15, new Enemy(58, 15, 10, 1));
+        this.level.placeEnemy(65, 18, new Enemy(65, 18, 10, 1));
+        this.level.placeEnemy(60, 34, new Enemy(60, 34, 10, 1));
         this.level.placeItem(17, 7, new HealthPotion());
 
         println("Loaded Game");

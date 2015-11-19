@@ -14,13 +14,17 @@ class Dynamic {
     void takeTurn() {}
 
     // move entity to given point in grid
-    void move(int x, int y, Grid grid) {
-        if (grid.data[x][y] instanceof Floor) {
-            grid.data[this.x][this.y].onExit(this);
-            grid.data[x][y].onEnter(this);
+    void move(int x, int y, Grid g) {
+        if (g.data[x][y] instanceof Floor) {
+            g.data[this.x][this.y].onExit(this);
+            g.data[x][y].onEnter(this);
             this.x = x;
             this.y = y;
         }
+    }
+
+    void step(int x, int y, Grid g) {
+        this.move(this.x + x, this.y + y, g);
     }
 
     // display dynamic entity (overloaded in subclass)
