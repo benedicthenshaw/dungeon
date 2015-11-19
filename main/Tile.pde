@@ -25,13 +25,18 @@ class Tile {
 
     // called when entity attempts to walk onto tile (overloaded in subclass)
     // return false when nothing occured
-    boolean onEnter(Dynamic p) {
+    boolean onEnter(Dynamic d) {
         return false;
+    }
+
+    boolean onExit(Dynamic d) {
+        this.dyn = null;
+        return true;
     }
 
     // called when entity presses interact next to tile (overloaded in subclass)
     // return false when nothing occured
-    boolean onInteract(Dynamic p) {
+    boolean onInteract(Dynamic d) {
         return false;
     }
 
@@ -53,9 +58,9 @@ class Tile {
 
 class Floor extends Tile {
     // move to tile if empty
-    boolean onEnter(Dynamic p) {
+    boolean onEnter(Dynamic d) {
         if (this.dyn == null){
-            this.dyn = p;
+            this.dyn = d;
         }
         return true;
     }

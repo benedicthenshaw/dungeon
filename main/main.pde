@@ -8,6 +8,7 @@ void setup() {
     // fullScreen();
     // DEBUG: windowed
     size(1280, 720);
+    pixelDensity(displayDensity());
     noStroke();
     ellipseMode(CORNER);
 

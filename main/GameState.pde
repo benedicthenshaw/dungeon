@@ -55,9 +55,7 @@ class Game extends GameState {
         println("Loaded Game");
     }
 
-    void update() {
-        takeKeyboardInput(this.level);
-    }
+    void update() {}
 
     void draw() {
         background(30, 30, 30);

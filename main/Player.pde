@@ -14,13 +14,31 @@ class Player extends Dynamic {
         this.inventory = new Item[INVENTORY_SIZE];
     }
 
-    void takeTurn(int action) {
+    void takeTurn(actions action, Grid g) {
+        this.input(action, g);
         println("Player did something!");
     }
 
     // take and act on player input for movement
-    void input() {
-
+    void input(actions action, Grid g) {
+        switch (action) {
+            case MOVE_UP: {
+                this.move(this.x, this.y - 1, g);
+            } break;
+            case MOVE_DOWN: {
+                this.move(this.x, this.y + 1, g);
+            } break;
+            case MOVE_LEFT: {
+                this.move(this.x - 1, this.y, g);
+            } break;
+            case MOVE_RIGHT: {
+                this.move(this.x + 1, this.y, g);
+            } break;
+            case INTERACT: {
+                // DEBUG:
+                println("Interacting!");
+            } break;
+        }
     }
 
     void takeItem(Item i) {

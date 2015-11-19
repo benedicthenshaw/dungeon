@@ -71,7 +71,7 @@ class Level {
 
     // carry out tasks that cause changes to the level
     // takes a player action; occurs on key press
-    void performTurn(int action) {
+    void performTurn(actions action) {
         // status update
         println("Something happened!");
         // enemy turns
@@ -79,7 +79,7 @@ class Level {
             e.takeTurn();
         }
         // player turn
-        this.player.takeTurn(action);
+        this.player.takeTurn(action, this.grid);
     }
 
 

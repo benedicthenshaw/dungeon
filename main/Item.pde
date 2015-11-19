@@ -26,7 +26,7 @@ class HealthPotion extends Item {
     }
 
     void draw(int x, int y, int size) {
-        fill(50, 50, 255);
+        fill(100, 100, 255);
         ellipse(x + size/4, y + size/4, size/2, size/2);
     }
 }

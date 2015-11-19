@@ -15,7 +15,12 @@ class Dynamic {
 
     // move entity to given point in grid
     void move(int x, int y, Grid grid) {
-        grid.data[x][y].onEnter(this);
+        if (grid.data[x][y] instanceof Floor) {
+            grid.data[this.x][this.y].onExit(this);
+            grid.data[x][y].onEnter(this);
+            this.x = x;
+            this.y = y;
+        }
     }
 
     // display dynamic entity (overloaded in subclass)
