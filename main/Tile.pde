@@ -68,7 +68,7 @@ class Floor extends Tile {
 
 class StoneFloor extends Floor {
     void draw(int x, int y, int size) {
-        fill(80,80,80);
+        fill(81, 81, 81);
         rect(x, y, size, size);
         this.drawContents(x, y, size);
     }
@@ -80,7 +80,7 @@ class Wall extends Tile {}
 
 class StoneWall extends Wall {
     void draw(int x, int y, int size) {
-        fill(180, 180, 180);
+        fill(211, 208, 200);
         rect(x, y, size, size);
         this.drawContents(x, y, size);
     }

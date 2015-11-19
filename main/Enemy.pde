@@ -16,7 +16,7 @@ class Enemy extends Dynamic {
     }
 
     void draw(int x, int y, int size) {
-        fill(255, 50, 50);
+        fill(242, 119, 122);
         ellipse(x, y, size, size);
     }
 }

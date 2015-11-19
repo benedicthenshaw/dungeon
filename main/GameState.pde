@@ -49,11 +49,13 @@ class Game extends GameState {
         this.level.placePathLine(33, 16, 33, 30);
 
         this.level.placePlayer(12, 7, new Player(12, 7, 10, 1));
+
         this.level.placeEnemy(17, 22, new Enemy(17, 22, 10, 1));
         this.level.placeEnemy(52, 12, new Enemy(52, 12, 10, 1));
         this.level.placeEnemy(58, 15, new Enemy(58, 15, 10, 1));
         this.level.placeEnemy(65, 18, new Enemy(65, 18, 10, 1));
         this.level.placeEnemy(60, 34, new Enemy(60, 34, 10, 1));
+
         this.level.placeItem(17, 7, new HealthPotion());
 
         println("Loaded Game");
@@ -62,11 +64,11 @@ class Game extends GameState {
     void update() {}
 
     void draw() {
-        background(30, 30, 30);
+        background(45, 45, 45);
         this.level.draw();
 
         // DEBUG: mouseover grid numbers (only works when no grid offset)
-        fill(255, 150, 150);
+        fill(255, 204, 102);
         textSize(18);
         text(round(mouseX / this.level.grid.tileSize) + ", " +
              round(mouseY / this.level.grid.tileSize),

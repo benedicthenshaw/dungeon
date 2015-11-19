@@ -47,7 +47,7 @@ class Player extends Dynamic {
     }
 
     void draw(int x, int y, int size) {
-        fill(50, 255, 50);
+        fill(255, 204, 102);
         ellipse(x, y, size, size);
     }
 }

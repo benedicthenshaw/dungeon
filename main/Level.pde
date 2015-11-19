@@ -36,9 +36,16 @@ class Level {
     }
 
     // places one tile of a path
-    void placePathStep(int x, int y) {
+    void placePathStep(int x, int y, boolean horizontal) {
         // TODO: paths need walls
         this.grid.setTile(x, y, new StoneFloor());
+        if (horizontal) {
+            this.grid.setTile(x, y - 1, new StoneWall());
+            this.grid.setTile(x, y + 1, new StoneWall());
+        } else {
+            this.grid.setTile(x - 1, y, new StoneWall());
+            this.grid.setTile(x + 1, y, new StoneWall());
+        }
     }
 
     // TODO: use Bresenham's line algorithm
@@ -46,11 +53,15 @@ class Level {
     void placePathLine(int startX, int startY, int endX, int endY) {
         if (startY == endY) {
             for (int i = startX; i <= endX; i++) {
-                this.placePathStep(i, startY);
+                if (this.grid.data[i][startY] == null || this.grid.data[i][startY] instanceof Wall) {
+                    this.placePathStep(i, startY, true);
+                }
             }
         } else {
             for (int i = startY; i <= endY; i++) {
-                this.placePathStep(startX, i);
+                if (this.grid.data[startX][i] == null || this.grid.data[startX][i] instanceof Wall) {
+                    this.placePathStep(startX, i, false);
+                }
             }
         }
     }
