@@ -2,9 +2,9 @@
 Manages the tile layout and generation for a level, including all entities within the level.
 
 ##Fields
-####`ArrayList<`[`Enemy`](Enemy.md)`>` `enemies`
-####[`Grid`](Grid.md) `grid`
-####[`Player`](Player.md) `player`
+#####`ArrayList<`[`Enemy`](Enemy.md)`>` `enemies`
+#####[`Grid`](Grid.md) `grid`
+#####[`Player`](Player.md) `player`
 
 ##Methods
 ###createRoom
