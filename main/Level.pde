@@ -48,7 +48,7 @@ class Level {
         }
     }
 
-    // TODO: use Bresenham's line algorithm
+    // NOTE: use Bresenham's line algorithm?
     // draw straight path from one point to another (inclusive)
     void placePathLine(int startX, int startY, int endX, int endY) {
         if (startY == endY) {
@@ -85,12 +85,14 @@ class Level {
     void performTurn(actions action) {
         // status update
         println("Something happened!");
+
+        // player turn
+        this.player.takeTurn(action, this.grid);
+
         // enemy turns
         for (Enemy e : this.enemies) {
             e.takeTurn(this.grid);
         }
-        // player turn
-        this.player.takeTurn(action, this.grid);
     }
 
 
