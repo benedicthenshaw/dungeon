@@ -4,10 +4,16 @@
 class Dynamic {
     int x;
     int y;
+    int health;
+    int maxHealth;
+    int damage;
 
-    Dynamic(int x, int y) {
+    Dynamic(int x, int y, int health, int damage) {
         this.x = x;
         this.y = y;
+        this.health = health;
+        this.maxHealth = health;
+        this.damage = damage;
     }
 
     // performs actions required each turn (overloaded in subclass)

@@ -45,11 +45,12 @@ class Tile {
 
     // draws entities on this tile
     void drawContents(int x, int y, int size) {
+        // NOTE: contents need to be a pixel smaller to fit
         if (this.item != null) {
-            this.item.draw(x, y, size);
+            this.item.draw(x, y, size-1);
         }
         if (this.dyn != null) {
-            this.dyn.draw(x, y, size);
+            this.dyn.draw(x, y, size-1);
         }
     }
 }
@@ -63,7 +64,8 @@ class Floor extends Tile {
             this.dyn = d;
             return true;
         } else {
-            // TODO: attack if there is a dynamic entity
+            // TODO: proper fighting!
+            this.dyn.health -= 1;
             return false;
         }
     }

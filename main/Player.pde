@@ -3,14 +3,10 @@
 int INVENTORY_SIZE = 8;
 
 class Player extends Dynamic {
-    int health;
-    int damage;
     Item inventory[];
 
     Player(int x, int y, int health, int damage) {
-        super(x, y);
-        this.health = health;
-        this.damage = damage;
+        super(x, y, health, damage);
         this.inventory = new Item[INVENTORY_SIZE];
     }
 
