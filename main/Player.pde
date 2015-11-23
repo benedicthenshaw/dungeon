@@ -26,7 +26,7 @@ class Player extends Dynamic {
                 this.step(0, -1, g);
             } break;
             case MOVE_DOWN: {
-                this.step(, 1, g);
+                this.step(0, 1, g);
             } break;
             case MOVE_LEFT: {
                 this.step(-1, 0, g);
