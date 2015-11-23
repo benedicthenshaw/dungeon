@@ -65,7 +65,7 @@ class Floor extends Tile {
             return true;
         } else {
             // TODO: proper fighting!
-            this.dyn.health -= 1;
+            this.dyn.health -= d.damage;
             return false;
         }
     }
