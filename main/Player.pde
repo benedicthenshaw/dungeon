@@ -16,7 +16,6 @@ class Player extends Dynamic {
 
     void takeTurn(actions action, Level l) {
         this.input(action, l.grid);
-        println("Player did something!");
     }
 
     // take and act on player input for movement

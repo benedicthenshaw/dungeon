@@ -18,7 +18,6 @@ class Menu extends GameState {
     void load() {
         // this.font = createFont("Quicksand-Light.ttf", 128);
         // textFont(this.font);
-        println("Loaded Menu");
     }
 
     void update() {
@@ -57,8 +56,6 @@ class Game extends GameState {
         this.level.placeEnemy(60, 34, new Enemy(60, 34, 10, 1));
 
         this.level.placeItem(17, 7, new HealthPotion());
-
-        println("Loaded Game");
     }
 
     void update() {}

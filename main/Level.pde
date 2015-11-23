@@ -84,7 +84,6 @@ class Level {
     // takes a player action; occurs on key press
     void performTurn(actions action) {
         // status update
-        println("Something happened!");
 
         // player turn
         this.player.takeTurn(action, this);
