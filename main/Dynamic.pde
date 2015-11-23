@@ -16,12 +16,12 @@ class Dynamic {
     // move entity to given point in grid
     void move(int x, int y, Grid g) {
         if (g.data[x][y] instanceof Floor) {
+            // if movement did occur
             if (g.data[x][y].onEnter(this)) {
-                // movement was successful
-                this.x = x;
-                this.y = y;
                 // NOTE: future bug if onExit gets more complicated
                 g.data[this.x][this.y].onExit(this);
+                this.x = x;
+                this.y = y;
             }
         }
     }
