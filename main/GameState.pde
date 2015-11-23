@@ -47,7 +47,7 @@ class Game extends GameState {
         this.level.placePathLine(19, 16, 50, 16);
         this.level.placePathLine(33, 16, 33, 30);
 
-        this.level.placePlayer(12, 7, new Player(12, 7, 10, 1));
+        this.level.placePlayer(12, 7, new Player(12, 7, 20, 1));
 
         this.level.placeEnemy(17, 22, new Enemy(17, 22, 10, 1));
         this.level.placeEnemy(52, 12, new Enemy(52, 12, 10, 1));

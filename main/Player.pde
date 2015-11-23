@@ -11,7 +11,9 @@ class Player extends Dynamic {
     }
 
     void takeTurn(actions action, Level l) {
-        this.input(action, l.grid);
+        if (this.health > 0) {
+            this.input(action, l.grid);
+        }
     }
 
     // take and act on player input for movement
@@ -43,6 +45,10 @@ class Player extends Dynamic {
 
     void draw(int x, int y, int size) {
         fill(255, 204, 102);
+        arc(x, y, size, size, 0, TWO_PI * ((float)health/maxHealth), PIE);
+        stroke(255, 204, 102);
+        noFill();
         ellipse(x, y, size, size);
+        noStroke();
     }
 }

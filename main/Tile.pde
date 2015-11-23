@@ -47,10 +47,10 @@ class Tile {
     void drawContents(int x, int y, int size) {
         // NOTE: contents need to be a pixel smaller to fit
         if (this.item != null) {
-            this.item.draw(x, y, size-1);
+            this.item.draw(x+1, y+1, size-2);
         }
         if (this.dyn != null) {
-            this.dyn.draw(x, y, size-1);
+            this.dyn.draw(x+1, y+1, size-2);
         }
     }
 }
