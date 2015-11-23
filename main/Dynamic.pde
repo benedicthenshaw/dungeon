@@ -23,6 +23,7 @@ class Dynamic {
         }
     }
 
+    // movement relative to current position
     void step(int x, int y, Grid g) {
         this.move(this.x + x, this.y + y, g);
     }

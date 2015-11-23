@@ -23,16 +23,16 @@ class Player extends Dynamic {
     void input(actions action, Grid g) {
         switch (action) {
             case MOVE_UP: {
-                this.move(this.x, this.y - 1, g);
+                this.step(0, -1, g);
             } break;
             case MOVE_DOWN: {
-                this.move(this.x, this.y + 1, g);
+                this.step(, 1, g);
             } break;
             case MOVE_LEFT: {
-                this.move(this.x - 1, this.y, g);
+                this.step(-1, 0, g);
             } break;
             case MOVE_RIGHT: {
-                this.move(this.x + 1, this.y, g);
+                this.step(1, 0, g);
             } break;
             case INTERACT: {
                 // DEBUG:
