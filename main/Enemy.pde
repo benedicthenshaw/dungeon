@@ -10,10 +10,10 @@ class Enemy extends Dynamic {
         this.damage = damage;
     }
 
-    void takeTurn(Grid g) {
+    void takeTurn(Level l) {
         println("Enemy did something!");
         // DEBUG: random steps
-        // this.step(round(random(-1, 1)), round(random(-1, 1)), g);
+        this.step(round(random(-1, 1)), round(random(-1, 1)), l.grid);
     }
 
     void draw(int x, int y, int size) {

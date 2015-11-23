@@ -87,11 +87,11 @@ class Level {
         println("Something happened!");
 
         // player turn
-        this.player.takeTurn(action, this.grid);
+        this.player.takeTurn(action, this);
 
         // enemy turns
         for (Enemy e : this.enemies) {
-            e.takeTurn(this.grid);
+            e.takeTurn(this);
         }
     }
 

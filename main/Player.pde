@@ -14,8 +14,8 @@ class Player extends Dynamic {
         this.inventory = new Item[INVENTORY_SIZE];
     }
 
-    void takeTurn(actions action, Grid g) {
-        this.input(action, g);
+    void takeTurn(actions action, Level l) {
+        this.input(action, l.grid);
         println("Player did something!");
     }
 
