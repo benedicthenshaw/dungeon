@@ -61,8 +61,11 @@ class Floor extends Tile {
     boolean onEnter(Dynamic d) {
         if (this.dyn == null){
             this.dyn = d;
+            return true;
+        } else {
+            // TODO: attack if there is a dynamic entity
+            return false;
         }
-        return true;
     }
 }
 

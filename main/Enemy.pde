@@ -13,7 +13,7 @@ class Enemy extends Dynamic {
     void takeTurn(Grid g) {
         println("Enemy did something!");
         // DEBUG: random steps
-        this.step(round(random(-1, 1)), round(random(-1, 1)), g);
+        // this.step(round(random(-1, 1)), round(random(-1, 1)), g);
     }
 
     void draw(int x, int y, int size) {
