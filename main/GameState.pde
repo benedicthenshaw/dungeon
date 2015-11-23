@@ -43,9 +43,11 @@ class Game extends GameState {
         this.level = new Level(80, 45, width, height);
         this.level.createRoom(10, 5, 10, 20);
         this.level.createRoom(50, 10, 20, 30);
-        this.level.createRoom(25, 30, 10, 7);
-        this.level.placePathLine(19, 16, 50, 16);
-        this.level.placePathLine(33, 16, 33, 30);
+        this.level.createRoom(15, 30, 30, 7);
+        this.level.createRoom(25, 5, 20, 8);
+        this.level.placePathLine(19, 20, 50, 20);
+        this.level.placePathLine(33, 20, 33, 30);
+        this.level.placePathLine(40, 12, 40, 20);
 
         this.level.placePlayer(12, 7, new Player(12, 7, 20, 1));
 
