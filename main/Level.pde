@@ -53,13 +53,15 @@ class Level {
     void placePathLine(int startX, int startY, int endX, int endY) {
         if (startY == endY) {
             for (int i = startX; i <= endX; i++) {
-                if (this.grid.data[i][startY] == null || this.grid.data[i][startY] instanceof Wall) {
+                if (this.grid.data[i][startY] == null ||
+                    this.grid.data[i][startY] instanceof Wall) {
                     this.placePathStep(i, startY, true);
                 }
             }
         } else {
             for (int i = startY; i <= endY; i++) {
-                if (this.grid.data[startX][i] == null || this.grid.data[startX][i] instanceof Wall) {
+                if (this.grid.data[startX][i] == null ||
+                    this.grid.data[startX][i] instanceof Wall) {
                     this.placePathStep(startX, i, false);
                 }
             }
@@ -93,7 +95,6 @@ class Level {
             e.takeTurn(this);
         }
     }
-
 
     // draw level grid
     void draw() {
