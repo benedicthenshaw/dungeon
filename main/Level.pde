@@ -87,6 +87,12 @@ class Level {
     // takes a player action; occurs on key press
     void performTurn(actions a) {
         // status update
+        for (int i = this.enemies.size()-1; i >= 0; i--) {
+            if (this.enemies.get(i).health <= 0) {
+                this.grid.data[this.enemies.get(i).x][this.enemies.get(i).y].dyn = null;
+                this.enemies.remove(this.enemies.get(i));
+            }
+        }
 
         // player turn
         this.player.takeTurn(a, this);
