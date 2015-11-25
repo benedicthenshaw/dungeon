@@ -10,6 +10,7 @@ void setup() {
     size(1280, 720);
     pixelDensity(displayDensity());
     noStroke();
+    noSmooth();
     ellipseMode(CORNER);
 
     menu.load();
