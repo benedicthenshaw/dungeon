@@ -46,7 +46,6 @@ class Level {
                 int pathY = round(random(roomY + 1, roomHeight - 1));
                 int pathLength = roomSpacing + 1;
                 this.placePathLine(pathX, pathY, pathX + pathLength, pathY);
-                println(pathLength);
             }
         }
 
@@ -102,7 +101,7 @@ class Level {
     // TODO: get tile type from parameters
 
     // place rectangular room with one tile thick walls
-    // (floor space is width-2, height-2; walls take some space!)
+    // walls will not replace floor tiles (helps avoid sealed off rooms)
     void createRoom(int x, int y, int width, int height) {
         // place floor
         for (int i = 1; i < width - 1; i++) {
