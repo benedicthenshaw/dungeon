@@ -80,6 +80,7 @@ class Level {
     void placePlayer(int x, int y, Player p) {
         this.player = p;
         this.grid.placeDynamic(x, y, p);
+        this.grid.makeAreaVisible(x, y, p.sightDistance);
     }
 
     // carry out tasks that cause changes to the level
