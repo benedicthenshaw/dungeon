@@ -39,7 +39,6 @@ class Game extends GameState {
     Level level = null;
 
     void load() {
-
         this.level = new Level(80, 45, width, height);
         this.level.generateLevel();
 
@@ -62,12 +61,6 @@ class Game extends GameState {
         // this.level.placeEnemy(60, 34, new Enemy(10, 1));
 
         // this.level.placeItem(17, 7, new HealthPotion());
-
-        // DEBUG: basic room
-        // this.level.createRoom(0, 0, this.grid.width,this.grid.height);
-        // this.level.placePlayer(round(random(1, this.grid.width-1)),
-        //                        round(random(1, this.grid.height-1)),
-        //                        new Player(20, 1));
     }
 
     void update() {}
