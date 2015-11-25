@@ -21,7 +21,7 @@ class Grid {
         } else {
             this.tileSize = screenWidth / gridWidth;
         }
-        // center grid
+        // centre grid
         this.gridOffsetX = (screenWidth - (gridWidth * this.tileSize)) / 2;
         this.gridOffsetY = (screenHeight - (gridHeight * this.tileSize)) / 2;
     }
@@ -69,6 +69,47 @@ class Grid {
         }
     }
 
+    // TODO: optimise visibility reset
+    // TODO: circular area
+    // TODO: line of sight visibility
+    // makes area around given point visible
+    void makeAreaVisible(int x, int y, int r) {
+        // visible = false for all tiles
+        for (int i = 0; i < this.width; i++) {
+            for (int j = 0; j < this.height; j++) {
+                if (this.data[i][j] != null) {
+                    this.data[i][j].visible = false;
+                }
+            }
+        }
+
+        // find tiles in a square around (x, y)
+        for (int i = x - r; i <= x + r; i++) {
+            for (int j = y - r; j <= y + r; j++) {
+                if (this.tileInBounds(i, j)) {
+                    if (this.data[i][j] != null) {
+                        this.data[i][j].visible = true;
+                    }
+                }
+            }
+        }
+
+        // find tiles in a circle around (x, y)
+        // for (int i = x - r; i < x + r; i++) {
+        //     for (int j = x - r; j < y + r; j++) {
+        //         double distSq = ((i - x) * (i - x)) +
+        //                         ((j - y) * (j - y));
+        //         if (distSq <= r*r) {
+        //             if (this.tileInBounds(i, j)) {
+        //                 if (this.data[i][j] != null) {
+        //                     this.data[i][j].visible = true;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+    }
+
     // draw a tile using scale
     void drawTile(int x, int y, Tile t) {
         if (tileInBounds(x, y)) {
@@ -98,7 +139,8 @@ class Grid {
 
     // DEBUG
     boolean tileInBounds(int x, int y) {
-        if (x < width && y < height) {
+        if (x >= 0 && x < width &&
+            y >= 0 && y < height) {
             return true;
         } else {
             println("OUT OF GRID BOUNDS:", x, y);

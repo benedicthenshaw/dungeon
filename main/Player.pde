@@ -3,11 +3,19 @@
 int INVENTORY_SIZE = 8;
 
 class Player extends Dynamic {
+    // distance between leftmost and rightmost visible tile
+    int sightDistance;
     Item inventory[];
 
     Player(int x, int y, int health, int damage) {
         super(x, y, health, damage);
+        this.sightDistance = 10;
         this.inventory = new Item[INVENTORY_SIZE];
+    }
+
+    void move(int x, int y, Grid g) {
+        super.move(x, y, g);
+        g.makeAreaVisible(x, y, this.sightDistance);
     }
 
     void takeTurn(actions action, Level l) {

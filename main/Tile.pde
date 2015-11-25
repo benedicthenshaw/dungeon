@@ -7,20 +7,27 @@ class Tile {
     // enemy, player, etc. on this tile
     Dynamic dyn;
 
+    // TODO: fog of war style visibility?
+    // boolean seen;
+    boolean visible;
+
     Tile() {
         this.item = null;
         this.dyn = null;
+        this.visible = false;
     }
 
     Tile(Item item, Dynamic dyn) {
         this.item = item;
         this.dyn = dyn;
+        this.visible = false;
     }
 
     // copy contents to new tile
     Tile(Tile t) {
         this.item = t.item;
         this.dyn = t.dyn;
+        this.visible = false;
     }
 
     // called when entity attempts to walk onto tile (overloaded in subclass)
@@ -34,14 +41,20 @@ class Tile {
         return true;
     }
 
-    // called when entity presses interact next to tile (overloaded in subclass)
+    // called when entity presses interact on a tile (overloaded in subclass)
     // return false when nothing occured
     boolean onInteract(Dynamic d) {
         return false;
     }
 
-    // display tile (overloaded in subclass)
-    void draw(int x, int y, int size) {}
+    void draw(int x, int y, int size) {
+        if (this.visible) {
+            this.drawTile(x, y, size);
+        }
+    }
+
+    // tile specific drawing(overloaded in subclass)
+    void drawTile(int x, int y, int size) {}
 
     // draws entities on this tile
     void drawContents(int x, int y, int size) {
@@ -72,7 +85,7 @@ class Floor extends Tile {
 }
 
 class StoneFloor extends Floor {
-    void draw(int x, int y, int size) {
+    void drawTile(int x, int y, int size) {
         fill(81, 81, 81);
         rect(x, y, size, size);
         this.drawContents(x, y, size);
@@ -84,7 +97,7 @@ class StoneFloor extends Floor {
 class Wall extends Tile {}
 
 class StoneWall extends Wall {
-    void draw(int x, int y, int size) {
+    void drawTile(int x, int y, int size) {
         fill(211, 208, 200);
         rect(x, y, size, size);
         this.drawContents(x, y, size);
