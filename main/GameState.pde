@@ -34,15 +34,15 @@ class Menu extends GameState {
 
         background(45, 45, 45);
 
-        y += (height - y) * 0.05;
+        float t = millis()/1000;
+        y += (height + 100*sin(t) - y) * 0.05;
 
-        float t = millis();
         fill(242, 119, 122);
-        ellipse(width/2, height/2, 600 + 300 * sin(t/1000), 600 + 300 * sin(t/1000));
+        ellipse(width/2, height/2, 600 + 300 * sin(t), 600 + 300 * sin(t));
         fill(81, 81, 81, 100);
-        ellipse(width/2, height/2, 500 + 1000 * sin(t/1100), 500 + 1000 * sin(t/1100));
+        ellipse(width/2, height/2, 500 + 1000 * sin(t*10), 500 + 1000 * sin(t*10));
         fill(81, 81, 81, 50);
-        ellipse(width/2, height/2, 400 + 300 * sin(t/1000), 400 + 300 * sin(t/1000));
+        ellipse(width/2, height/2, 400 + 300 * sin(t*20), 400 + 300 * sin(t*20));
 
         textSize(120);
         String title = "DUNGEON CLEANER";
