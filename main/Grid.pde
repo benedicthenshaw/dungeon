@@ -78,36 +78,37 @@ class Grid {
         for (int i = 0; i < this.width; i++) {
             for (int j = 0; j < this.height; j++) {
                 if (this.data[i][j] != null) {
-                    this.data[i][j].visible = false;
+                    if (!(this.data[i][j] instanceof Wall))
+                        this.data[i][j].visible = false;
                 }
             }
         }
 
         // find tiles in a square around (x, y)
-        for (int i = x - r; i <= x + r; i++) {
-            for (int j = y - r; j <= y + r; j++) {
-                if (this.tileInBounds(i, j)) {
-                    if (this.data[i][j] != null) {
-                        this.data[i][j].visible = true;
-                    }
-                }
-            }
-        }
-
-        // find tiles in a circle around (x, y)
-        // for (int i = x - r; i < x + r; i++) {
-        //     for (int j = x - r; j < y + r; j++) {
-        //         double distSq = ((i - x) * (i - x)) +
-        //                         ((j - y) * (j - y));
-        //         if (distSq <= r*r) {
-        //             if (this.tileInBounds(i, j)) {
-        //                 if (this.data[i][j] != null) {
-        //                     this.data[i][j].visible = true;
-        //                 }
+        // for (int i = x - r; i <= x + r; i++) {
+        //     for (int j = y - r; j <= y + r; j++) {
+        //         if (this.tileInBounds(i, j)) {
+        //             if (this.data[i][j] != null) {
+        //                 this.data[i][j].visible = true;
         //             }
         //         }
         //     }
         // }
+
+        // find tiles in a circle around (x, y)
+        for (int i = x - r; i < x + r; i++) {
+            for (int j = y - r; j < y + r; j++) {
+                double distSq = ((i - x) * (i - x)) +
+                                ((j - y) * (j - y));
+                if (distSq <= r*r) {
+                    if (this.tileInBounds(i, j)) {
+                        if (this.data[i][j] != null) {
+                            this.data[i][j].visible = true;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // draw a tile using scale

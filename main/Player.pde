@@ -9,7 +9,8 @@ class Player extends Dynamic {
 
     Player(int x, int y, int health, int damage) {
         super(x, y, health, damage);
-        this.sightDistance = 10;
+        // NOTE: what influences this stat?
+        this.sightDistance = 11;
         this.inventory = new Item[INVENTORY_SIZE];
     }
 
