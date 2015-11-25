@@ -15,7 +15,7 @@ void setup() {
 
     menu.load();
     game.load();
-    state = game;
+    state = menu;
 }
 
 void draw() {
