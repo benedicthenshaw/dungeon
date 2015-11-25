@@ -49,6 +49,9 @@ class Level {
                 println(pathLength);
             }
         }
+
+        randomlyPlacePlayer();
+        randomlyPlaceEnemies(round(random(rooms*2, rooms*4)));
     }
 
     void generateOpenLevel() {

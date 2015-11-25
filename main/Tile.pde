@@ -14,20 +14,20 @@ class Tile {
     Tile() {
         this.item = null;
         this.dyn = null;
-        this.visible = true;
+        this.visible = false;
     }
 
     Tile(Item item, Dynamic dyn) {
         this.item = item;
         this.dyn = dyn;
-        this.visible = true;
+        this.visible = false;
     }
 
     // copy contents to new tile
     Tile(Tile t) {
         this.item = t.item;
         this.dyn = t.dyn;
-        this.visible = true;
+        this.visible = false;
     }
 
     // called when entity attempts to walk onto tile (overloaded in subclass)
