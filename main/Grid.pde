@@ -70,14 +70,14 @@ class Grid {
     }
 
     // TODO: optimise visibility reset
-    // TODO: circular area
-    // TODO: line of sight visibility
+    // TODO: propagating line of sight
     // makes area around given point visible
     void makeAreaVisible(int x, int y, int r) {
         // visible = false for all tiles
         for (int i = 0; i < this.width; i++) {
             for (int j = 0; j < this.height; j++) {
                 if (this.data[i][j] != null) {
+                    // TODO: track visibility better than 'check if wall'
                     if (!(this.data[i][j] instanceof Wall))
                         this.data[i][j].visible = false;
                 }
