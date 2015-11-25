@@ -92,6 +92,35 @@ class StoneFloor extends Floor {
     }
 }
 
+class TrapDoor extends Floor {
+    boolean onEnter(Dynamic d) {
+        if (super.onEnter(d)) {
+            if (d instanceof Player) {
+                game.level.generateLevel();
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    void drawTile(int x, int y, int size) {
+        fill(45, 45, 45);
+        rect(x, y, size, size/3);
+        fill(57, 57, 57);
+        rect(x, y + size/3, size, size/3);
+        fill(81, 81, 81);
+        rect(x, y + 2*size/3, size, size/3);
+
+        noFill();
+        stroke(242, 240, 236);
+        rect(x, y, size-1, size-1);
+        noStroke();
+        this.drawContents(x, y, size);
+    }
+}
+
+
 ///// WALLS /////
 
 class Wall extends Tile {}
@@ -103,7 +132,3 @@ class StoneWall extends Wall {
         this.drawContents(x, y, size);
     }
 }
-
-///// SCENERY /////
-
-class Scenery extends Tile {}

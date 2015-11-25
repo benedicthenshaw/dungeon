@@ -15,7 +15,7 @@ class Level {
     // fill grid with random level
     void generateLevel() {
         this.destroy();
-        switch (round(random(1, 2))) {
+        switch (round(random(0, 2))) {
             case 0: {
                 this.generateOpenLevel();
             } break;
@@ -56,6 +56,7 @@ class Level {
 
         randomlyPlacePlayer();
         randomlyPlaceEnemies(round(random(rooms*2, rooms*3)));
+        randomlyPlaceTrapDoor();
     }
 
     void generateVerticalLevel() {
@@ -83,12 +84,14 @@ class Level {
 
         randomlyPlacePlayer();
         randomlyPlaceEnemies(round(random(rooms*2, rooms*3)));
+        randomlyPlaceTrapDoor();
     }
 
     void generateOpenLevel() {
         this.createRoom(0, 0, this.grid.width,this.grid.height);
         randomlyPlacePlayer();
-        randomlyPlaceEnemies(50);
+        randomlyPlaceEnemies(round(random(20, 50)));
+        randomlyPlaceTrapDoor();
     }
 
     // TODO: major optimisation
@@ -123,11 +126,27 @@ class Level {
         }
     }
 
+    // TODO: major optimisation
+    void randomlyPlaceTrapDoor() {
+        boolean found = false;
+        while (!found) {
+            int x = round(random(1, this.grid.width-1));
+            int y = round(random(1, this.grid.height-1));
+            if (this.grid.data[x][y] != null &&
+                this.grid.data[x][y] instanceof Floor) {
+                this.grid.setTile(x, y, new TrapDoor());
+                found = true;
+            }
+        }
+    }
+
     // remove all tiles
     void destroy() {
         for (int i = 0; i < this.grid.width; i++) {
             for (int j = 0; j < this.grid.height; j++) {
                 this.grid.data[i][j] = null;
+                this.enemies = new ArrayList<Enemy>();
+                this.player = null;
             }
         }
     }
