@@ -13,7 +13,7 @@ class Enemy extends Dynamic {
     void takeTurn(Level l) {
         // DEBUG: simple movement towards player
         if (this.health > 0) {
-            int agroDistance = 5;
+            int agroDistance = 8;
             int dx = this.x - l.player.x;
             int dy = this.y - l.player.y;
             if (abs(dx) < agroDistance && abs(dy) < agroDistance) {

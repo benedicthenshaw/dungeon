@@ -54,7 +54,7 @@ class Level {
         }
 
         randomlyPlacePlayer();
-        randomlyPlaceEnemies(round(random(rooms*2, rooms*4)));
+        randomlyPlaceEnemies(round(random(rooms*2, rooms*3)));
     }
 
     void generateVerticalLevel() {
@@ -81,7 +81,7 @@ class Level {
         }
 
         randomlyPlacePlayer();
-        randomlyPlaceEnemies(round(random(rooms*2, rooms*4)));
+        randomlyPlaceEnemies(round(random(rooms*2, rooms*3)));
     }
 
     void generateOpenLevel() {
@@ -91,6 +91,7 @@ class Level {
     }
 
     // TODO: major optimisation
+    // TODO: stats are hard-coded here; change that!
     void randomlyPlacePlayer() {
         boolean found = false;
         while (!found) {
@@ -105,6 +106,7 @@ class Level {
     }
 
     // TODO: major optimisation
+    // TODO: stats are hard-coded here; change that!
     void randomlyPlaceEnemies(int n) {
         for ( ; n > 0; n--) {
             boolean found = false;
