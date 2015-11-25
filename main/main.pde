@@ -1,5 +1,5 @@
 // main.pde : entry point; pre-load; main loop
-//this comment has been added to test github merging
+
 Menu menu = new Menu();
 Game game = new Game();
 GameState state = null;
