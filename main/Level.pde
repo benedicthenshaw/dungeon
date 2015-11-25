@@ -14,8 +14,7 @@ class Level {
 
     // fill grid with random level
     void generateLevel() {
-        // switch (round(random(0, 0))) {
-        switch (1) {
+        switch (round(random(1, 2))) {
             case 0: {
                 this.generateOpenLevel();
             } break;
@@ -23,7 +22,39 @@ class Level {
             case 1: {
                 this.generateVerticalLevel();
             } break;
+
+            case 2: {
+                this.generateHorizontalLevel();
+            } break;
         }
+    }
+
+    void generateHorizontalLevel() {
+        int rooms = round(random(3, 6));
+
+        int roomSpacing = 3;
+        int roomWidth = this.grid.width - 4;
+        int roomHeight = this.grid.height / rooms - roomSpacing;
+
+        int roomStartY = 1 + (this.grid.height - rooms *
+                              (roomHeight + roomSpacing)) / 2;
+        int roomX = 2;
+        int roomY = roomStartY;
+
+        for (int i = 0; i < rooms; i++) {
+            roomY = roomStartY + i * (roomHeight + roomSpacing);
+            this.createRoom(roomX, roomY, roomWidth, roomHeight);
+
+            if (i < rooms-1) {
+                int pathX = round(random(roomX + 1, roomWidth - 1));
+                int pathY = roomY + (roomHeight-1);
+                int pathLength = roomSpacing + 1;
+                this.placePathLine(pathX, pathY, pathX, pathY + pathLength);
+            }
+        }
+
+        randomlyPlacePlayer();
+        randomlyPlaceEnemies(round(random(rooms*2, rooms*4)));
     }
 
     void generateVerticalLevel() {
