@@ -12,6 +12,51 @@ class Level {
         this.player = null;
     }
 
+    // fill grid with random level
+    void generateLevel() {
+        switch (round(random(0, 0))) {
+            case 0: {
+                this.generateOpenLevel();
+            } break;
+        }
+    }
+
+    void generateOpenLevel() {
+        this.createRoom(0, 0, this.grid.width,this.grid.height);
+        randomlyPlacePlayer();
+        randomlyPlaceEnemies(8);
+    }
+
+    // TODO: major optimisation
+    void randomlyPlacePlayer() {
+        boolean found = false;
+        while (!found) {
+            int x = round(random(1, this.grid.width-1));
+            int y = round(random(1, this.grid.height-1));
+            if (this.grid.data[x][y] != null &&
+                this.grid.data[x][y] instanceof Floor) {
+                this.placePlayer(x, y, new Player(20, 1));
+                found = true;
+            }
+        }
+    }
+
+    // TODO: major optimisation
+    void randomlyPlaceEnemies(int n) {
+        for ( ; n > 0; n--) {
+            boolean found = false;
+            while (!found) {
+                int x = round(random(1, this.grid.width-1));
+                int y = round(random(1, this.grid.height-1));
+                if (this.grid.data[x][y] != null &&
+                    this.grid.data[x][y] instanceof Floor) {
+                    this.placeEnemy(x, y, new Enemy(10, 1));
+                    found = true;
+                }
+            }
+        }
+    }
+
     // TODO: get tile type from parameters
 
     // place rectangular room with one tile thick walls
@@ -73,11 +118,15 @@ class Level {
     }
 
     void placeEnemy(int x, int y, Enemy d) {
+        d.x = x;
+        d.y = y;
         this.enemies.add(d);
         this.grid.placeDynamic(x, y, d);
     }
 
     void placePlayer(int x, int y, Player p) {
+        p.x = x;
+        p.y = y;
         this.player = p;
         this.grid.placeDynamic(x, y, p);
         this.grid.makeAreaVisible(x, y, p.sightDistance);

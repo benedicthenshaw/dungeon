@@ -144,7 +144,7 @@ class Grid {
             y >= 0 && y < height) {
             return true;
         } else {
-            println("OUT OF GRID BOUNDS:", x, y);
+            // println("OUT OF GRID BOUNDS:", x, y);
             return false;
         }
     }
