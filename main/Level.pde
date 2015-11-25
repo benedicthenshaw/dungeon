@@ -14,6 +14,7 @@ class Level {
 
     // fill grid with random level
     void generateLevel() {
+        this.destroy();
         switch (round(random(1, 2))) {
             case 0: {
                 this.generateOpenLevel();

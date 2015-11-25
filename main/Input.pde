@@ -27,9 +27,8 @@ void keyPressed() {
         game.level.performTurn(actions.INTERACT);
     }
 
-    // DEBUG: regenerate level
+    // DEBUG: re-generate level
     if (key == 'r') {
-        game.level.destroy();
         game.level.generateLevel();
     }
 }
