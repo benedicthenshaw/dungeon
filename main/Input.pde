@@ -26,4 +26,10 @@ void keyPressed() {
     if (key == Settings.interactKey || keyCode == Settings.interactKey) {
         game.level.performTurn(actions.INTERACT);
     }
+
+    // DEBUG: regenerate level
+    if (key == 'r') {
+        game.level.destroy();
+        game.level.generateLevel();
+    }
 }

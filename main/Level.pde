@@ -14,17 +14,47 @@ class Level {
 
     // fill grid with random level
     void generateLevel() {
-        switch (round(random(0, 0))) {
+        // switch (round(random(0, 0))) {
+        switch (1) {
             case 0: {
                 this.generateOpenLevel();
             } break;
+
+            case 1: {
+                this.generateVerticalLevel();
+            } break;
+        }
+    }
+
+    void generateVerticalLevel() {
+        int rooms = round(random(3, 7));
+
+        int roomSpacing = 3;
+        int roomWidth = this.grid.width / rooms - roomSpacing;
+        int roomHeight = this.grid.height - 4;
+
+        int roomStartX = 1 + (this.grid.width - rooms * (roomWidth + roomSpacing)) / 2;
+        int roomX = roomStartX;
+        int roomY = 2;
+
+        for (int i = 0; i < rooms; i++) {
+            roomX = roomStartX + i * (roomWidth + roomSpacing);
+            this.createRoom(roomX, roomY, roomWidth, roomHeight);
+
+            if (i < rooms-1) {
+                int pathX = roomX + (roomWidth-1);
+                int pathY = round(random(roomY + 1, roomHeight - 1));
+                int pathLength = roomSpacing + 1;
+                this.placePathLine(pathX, pathY, pathX + pathLength, pathY);
+                println(pathLength);
+            }
         }
     }
 
     void generateOpenLevel() {
         this.createRoom(0, 0, this.grid.width,this.grid.height);
         randomlyPlacePlayer();
-        randomlyPlaceEnemies(8);
+        randomlyPlaceEnemies(50);
     }
 
     // TODO: major optimisation
@@ -57,6 +87,15 @@ class Level {
         }
     }
 
+    // remove all tiles
+    void destroy() {
+        for (int i = 0; i < this.grid.width; i++) {
+            for (int j = 0; j < this.grid.height; j++) {
+                this.grid.data[i][j] = null;
+            }
+        }
+    }
+
     // TODO: get tile type from parameters
 
     // place rectangular room with one tile thick walls
@@ -71,12 +110,16 @@ class Level {
 
         // place walls
         for (int i = 0; i < width; i++) {
-            this.grid.setTile(i + x, y, new StoneWall());
-            this.grid.setTile(i + x, y + height-1, new StoneWall());
+            if (!(this.grid.data[i + x][y] instanceof Floor))
+                this.grid.setTile(i + x, y, new StoneWall());
+            if (!(this.grid.data[i + x][y + height-1] instanceof Floor))
+                this.grid.setTile(i + x, y + height-1, new StoneWall());
         }
         for (int i = 1; i < height - 1; i++) {
-            this.grid.setTile(x, i + y, new StoneWall());
-            this.grid.setTile(x + width - 1, i + y, new StoneWall());
+            if (!(this.grid.data[x][i + y] instanceof Floor))
+                this.grid.setTile(x, i + y, new StoneWall());
+            if (!(this.grid.data[x + width - 1][i + y] instanceof Floor))
+                this.grid.setTile(x + width - 1, i + y, new StoneWall());
         }
     }
 
@@ -137,9 +180,10 @@ class Level {
     void performTurn(actions a) {
         // status update
         for (int i = this.enemies.size()-1; i >= 0; i--) {
-            if (this.enemies.get(i).health <= 0) {
-                this.grid.data[this.enemies.get(i).x][this.enemies.get(i).y].dyn = null;
-                this.enemies.remove(this.enemies.get(i));
+            Enemy e = this.enemies.get(i);
+            if (e.health <= 0) {
+                this.grid.data[e.x][e.y].dyn = null;
+                this.enemies.remove(e);
             }
         }
 

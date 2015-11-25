@@ -70,10 +70,10 @@ class Game extends GameState {
         this.level.draw();
 
         // DEBUG: mouseover grid numbers (only works when no grid offset)
-        // fill(255, 204, 102);
-        // textSize(18);
-        // text(round(mouseX / this.level.grid.tileSize) + ", " +
-        //      round(mouseY / this.level.grid.tileSize),
-        //      5, 20);
+        fill(255, 204, 102);
+        textSize(18);
+        text(round(mouseX / this.level.grid.tileSize) + ", " +
+             round(mouseY / this.level.grid.tileSize),
+             5, 20);
     }
 }
