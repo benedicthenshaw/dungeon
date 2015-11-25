@@ -84,17 +84,6 @@ class Grid {
             }
         }
 
-        // find tiles in a square around (x, y)
-        // for (int i = x - r; i <= x + r; i++) {
-        //     for (int j = y - r; j <= y + r; j++) {
-        //         if (this.tileInBounds(i, j)) {
-        //             if (this.data[i][j] != null) {
-        //                 this.data[i][j].visible = true;
-        //             }
-        //         }
-        //     }
-        // }
-
         // find tiles in a circle around (x, y)
         for (int i = x - r; i < x + r+1; i++) {
             for (int j = y - r; j < y + r+1; j++) {
