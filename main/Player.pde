@@ -14,6 +14,12 @@ class Player extends Dynamic {
         this.inventory = new Item[INVENTORY_SIZE];
     }
 
+    Player(int health, int damage) {
+        super(health, damage);
+        this.sightDistance = 11;
+        this.inventory = new Item[INVENTORY_SIZE];
+    }
+
     void move(int x, int y, Grid g) {
         super.move(x, y, g);
         g.makeAreaVisible(x, y, this.sightDistance);

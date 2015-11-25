@@ -6,12 +6,16 @@ class Enemy extends Dynamic {
         super(x, y, health, damage);
     }
 
+    Enemy(int health, int damage) {
+        super(health, damage);
+    }
+
     void takeTurn(Level l) {
         // DEBUG: simple movement towards player
         if (this.health > 0) {
             int agroDistance = 5;
-            int dx = this.x - l.player.x; 
-            int dy = this.y - l.player.y; 
+            int dx = this.x - l.player.x;
+            int dy = this.y - l.player.y;
             if (abs(dx) < agroDistance && abs(dy) < agroDistance) {
                 if (round(random(0, 1)) == 0) {
                     this.step((dx < 0) ? 1 : -1, 0, l.grid);

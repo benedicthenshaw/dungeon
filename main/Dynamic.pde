@@ -16,6 +16,15 @@ class Dynamic {
         this.damage = damage;
     }
 
+    // only to be used by Level.placeDynamic()
+    Dynamic(int health, int damage) {
+        this.x = -1;
+        this.y = -1;
+        this.health = health;
+        this.maxHealth = health;
+        this.damage = damage;
+    }
+
     // performs actions required each turn (overloaded in subclass)
     void takeTurn() {}
 
