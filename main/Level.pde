@@ -140,7 +140,7 @@ class Level {
         }
     }
 
-    // remove all tiles
+    // remove level contents
     void destroy() {
         for (int i = 0; i < this.grid.width; i++) {
             for (int j = 0; j < this.grid.height; j++) {

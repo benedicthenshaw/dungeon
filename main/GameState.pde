@@ -13,11 +13,11 @@ class GameState {
 }
 
 class Menu extends GameState {
-    // PFont font;
+    PFont font;
 
     void load() {
-        // this.font = createFont("Quicksand-Light.ttf", 128);
-        // textFont(this.font);
+        this.font = createFont("Quicksand-Light.ttf", 64);
+        textFont(this.font);
     }
 
     void update() {
@@ -28,10 +28,31 @@ class Menu extends GameState {
     }
 
     void draw() {
-        background(200, 220, 220);
-        fill(255);
-        text("Play", 200, 200);
-        text("Quit", 200, 600);
+        ellipseMode(CENTER);
+
+        background(81, 81, 81);
+        // noFill();
+        // stroke(242, 119, 122);
+        fill(242, 119, 122);
+        ellipse(width/2, height/2, height/2, height/2);
+        // noStroke();
+
+        textSize(120);
+        String title = "DUNGEON CLEANER";
+        float w = textWidth(title);
+        fill(160, 159, 147);
+        text(title, (width - w)/2, height/2);
+
+        fill(242, 240, 236);
+        text(title, (width - w)/2, height/2 + 3);
+
+        textSize(42);
+        String play = "do anything to play";
+        w = textWidth(play);
+        fill(242, 240, 236);
+        text(play, (width - w)/2, 3*height/5);
+
+        ellipseMode(CORNER);
     }
 }
 
@@ -70,10 +91,10 @@ class Game extends GameState {
         this.level.draw();
 
         // DEBUG: mouseover grid numbers (only works when no grid offset)
-        fill(255, 204, 102);
-        textSize(18);
-        text(round(mouseX / this.level.grid.tileSize) + ", " +
-             round(mouseY / this.level.grid.tileSize),
-             5, 20);
+        // fill(255, 204, 102);
+        // textSize(18);
+        // text(round(mouseX / this.level.grid.tileSize) + ", " +
+        //      round(mouseY / this.level.grid.tileSize),
+        //      5, 20);
     }
 }

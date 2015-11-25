@@ -94,14 +94,10 @@ class StoneFloor extends Floor {
 
 class TrapDoor extends Floor {
     boolean onEnter(Dynamic d) {
-        if (super.onEnter(d)) {
-            if (d instanceof Player) {
-                game.level.generateLevel();
-            }
-            return true;
-        } else {
-            return false;
+        if (d instanceof Player) {
+            game.level.generateLevel();
         }
+        return false;
     }
 
     void drawTile(int x, int y, int size) {
