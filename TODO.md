@@ -17,9 +17,9 @@
 
 ##Milestone 1
 25/11/15
-* movement
+* ~~movement~~
 * basic GUI
-* basic enemy (no movement)
+* ~~basic enemy (no movement)~~
 * basic pick-ups
-* line of sight
-* descending levels
+* ~~line of sight~~
+* ~~descending levels~~
