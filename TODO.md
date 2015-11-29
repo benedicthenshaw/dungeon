@@ -9,7 +9,7 @@
 * sound effects
 * interface
 * inventory
-* items
+* ~~items~~
 * level types
 * tile types
 * music
