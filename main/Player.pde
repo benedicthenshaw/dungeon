@@ -7,17 +7,20 @@ class Player extends Dynamic {
     int sightDistance;
     Item inventory[];
 
+
     Player(int x, int y, int health, int damage) {
         super(x, y, health, damage);
         // NOTE: what influences this stat?
         this.sightDistance = 11;
         this.inventory = new Item[INVENTORY_SIZE];
+        this.weapon = null;
     }
 
     Player(int health, int damage) {
         super(health, damage);
         this.sightDistance = 11;
         this.inventory = new Item[INVENTORY_SIZE];
+        this.weapon = null;
     }
 
     void move(int x, int y, Grid g) {
@@ -47,8 +50,7 @@ class Player extends Dynamic {
                 this.step(1, 0, g);
             } break;
             case INTERACT: {
-                // DEBUG:
-                println("Interacting!");
+                g.data[this.x][this.y].onInteract(this);
             } break;
         }
     }

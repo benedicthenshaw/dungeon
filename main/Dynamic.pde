@@ -7,6 +7,7 @@ class Dynamic {
     int health;
     int maxHealth;
     int damage;
+    Weapon weapon;
 
     Dynamic(int x, int y, int health, int damage) {
         this.x = x;
@@ -39,6 +40,22 @@ class Dynamic {
                 this.y = y;
             }
         }
+    }
+
+    int attack() {
+        if (this.weapon != null) {
+            return this.weapon.attack();
+        } else {
+            return this.damage;
+        }
+    }
+
+    // NOTE: weapons are dropped on equip;
+    //       store in inventory instead?
+    Weapon equip(Weapon w) {
+        Weapon temp = this.weapon;
+        this.weapon = w;
+        return temp;
     }
 
     // movement relative to current position

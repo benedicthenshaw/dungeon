@@ -30,7 +30,7 @@ class Tile {
         this.visible = false;
     }
 
-    // called when entity attempts to walk onto tile (overloaded in subclass)
+    // called when entity attempts to walk onto tile
     // return false when nothing occured
     boolean onEnter(Dynamic d) {
         return false;
@@ -41,10 +41,15 @@ class Tile {
         return true;
     }
 
-    // called when entity presses interact on a tile (overloaded in subclass)
+    // called when entity presses interact on a tile
     // return false when nothing occured
     boolean onInteract(Dynamic d) {
-        return false;
+        if (this.item != null) {
+            this.item = d.equip((Weapon) this.item);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     void draw(int x, int y, int size) {
@@ -53,7 +58,7 @@ class Tile {
         }
     }
 
-    // tile specific drawing(overloaded in subclass)
+    // tile specific drawing
     void drawTile(int x, int y, int size) {}
 
     // draws entities on this tile
@@ -78,7 +83,7 @@ class Floor extends Tile {
             return true;
         } else {
             // TODO: proper fighting!
-            this.dyn.health -= d.damage;
+            this.dyn.health -= d.attack();
             return false;
         }
     }

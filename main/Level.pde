@@ -54,9 +54,7 @@ class Level {
             }
         }
 
-        randomlyPlacePlayer();
-        randomlyPlaceEnemies(round(random(rooms*2, rooms*3)));
-        randomlyPlaceTrapDoor();
+        this.randomlyPlaceEntities();
     }
 
     void generateVerticalLevel() {
@@ -82,15 +80,18 @@ class Level {
             }
         }
 
-        randomlyPlacePlayer();
-        randomlyPlaceEnemies(round(random(rooms*2, rooms*3)));
-        randomlyPlaceTrapDoor();
+        this.randomlyPlaceEntities();
     }
 
     void generateOpenLevel() {
         this.createRoom(0, 0, this.grid.width,this.grid.height);
+        this.randomlyPlaceEntities();
+    }
+
+    void randomlyPlaceEntities() {
         randomlyPlacePlayer();
         randomlyPlaceEnemies(round(random(20, 50)));
+        randomlyPlaceItems(50);
         randomlyPlaceTrapDoor();
     }
 
@@ -120,6 +121,32 @@ class Level {
                 if (this.grid.data[x][y] != null &&
                     this.grid.data[x][y] instanceof Floor) {
                     this.placeEnemy(x, y, new Enemy(10, 1));
+                    found = true;
+                }
+            }
+        }
+    }
+
+    // TODO: place items based on level difficulty
+    // TODO: stats are hard-coded here; change that!
+    void randomlyPlaceItems(int n) {
+        for ( ; n > 0; n--) {
+            boolean found = false;
+            while (!found) {
+                int x = round(random(1, this.grid.width-1));
+                int y = round(random(1, this.grid.height-1));
+                if (this.grid.data[x][y] != null &&
+                    this.grid.data[x][y] instanceof Floor) {
+                    // TODO: better item picking?
+                    switch (floor(random(0, 2))) {
+                        case 0: {
+                            this.placeItem(x, y, new Sword(5));
+                        } break;
+
+                        case 1: {
+                            this.placeItem(x, y, new Axe(10));
+                        } break;
+                    }
                     found = true;
                 }
             }

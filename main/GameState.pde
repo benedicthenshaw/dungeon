@@ -71,26 +71,6 @@ class Game extends GameState {
     void load() {
         this.level = new Level(80, 45, width, height);
         this.level.generateLevel();
-
-        // DEBUG: basic test level
-        // this.level.createRoom(10, 5, 10, 20);
-        // this.level.createRoom(50, 10, 20, 30);
-        // this.level.createRoom(15, 30, 30, 7);
-        // this.level.createRoom(25, 5, 20, 8);
-
-        // this.level.placePathLine(19, 20, 50, 20);
-        // this.level.placePathLine(33, 20, 33, 30);
-        // this.level.placePathLine(40, 12, 40, 20);
-
-        // this.level.placePlayer(12, 7, new Player(20, 1));
-
-        // this.level.placeEnemy(17, 22, new Enemy(10, 1));
-        // this.level.placeEnemy(52, 12, new Enemy(10, 1));
-        // this.level.placeEnemy(58, 15, new Enemy(10, 1));
-        // this.level.placeEnemy(65, 18, new Enemy(10, 1));
-        // this.level.placeEnemy(60, 34, new Enemy(10, 1));
-
-        // this.level.placeItem(17, 7, new HealthPotion());
     }
 
     void update() {}
