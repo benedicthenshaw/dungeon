@@ -23,7 +23,7 @@ class Enemy extends Dynamic {
                     this.step(0, (dy < 0) ? 1 : -1, l.grid);
                 }
             } else {
-                switch(round(random(0, 3))) {
+                switch(floor(random(0, 4))) {
                     case 0: {
                         this.step(0, -1, l.grid);
                     } break;
