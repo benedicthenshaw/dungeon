@@ -39,15 +39,19 @@ class Player extends Dynamic {
         switch (action) {
             case MOVE_UP: {
                 this.step(0, -1, g);
+                step1.trigger();
             } break;
             case MOVE_DOWN: {
                 this.step(0, 1, g);
+                step2.trigger();
             } break;
             case MOVE_LEFT: {
                 this.step(-1, 0, g);
+                step3.trigger();
             } break;
             case MOVE_RIGHT: {
                 this.step(1, 0, g);
+                step4.trigger();
             } break;
             case INTERACT: {
                 g.data[this.x][this.y].onInteract(this);
@@ -58,6 +62,11 @@ class Player extends Dynamic {
     void takeItem(Item i) {
         // TODO: dynamic inventory management
         this.inventory[0] = i;
+    }
+    
+    void stepSound(Level l) {
+        
+        step2.trigger();
     }
 
     void draw(int x, int y, int size) {

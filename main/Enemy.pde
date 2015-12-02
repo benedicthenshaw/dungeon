@@ -10,6 +10,7 @@ class Enemy extends Dynamic {
         super(health, damage);
     }
 
+
     void takeTurn(Level l) {
         // DEBUG: simple movement towards player
         if (this.health > 0) {

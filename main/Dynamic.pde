@@ -46,6 +46,8 @@ class Dynamic {
         if (this.weapon != null) {
             return this.weapon.attack();
         } else {
+            //sound1.trigger();
+            
             return this.damage;
         }
     }
@@ -62,7 +64,6 @@ class Dynamic {
     void step(int x, int y, Grid g) {
         this.move(this.x + x, this.y + y, g);
     }
-
     // display dynamic entity (overloaded in subclass)
     void draw(int x, int y, int size) {}
 }
