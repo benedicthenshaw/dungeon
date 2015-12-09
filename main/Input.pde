@@ -26,9 +26,15 @@ void keyPressed() {
     if (key == Settings.interactKey || keyCode == Settings.interactKey) {
         game.level.performTurn(actions.INTERACT);
     }
+    if (key == Settings.sightKeyUC || key == Settings.sightKeyLC) {
+        game.level.player.sightOn=!game.level.player.sightOn;
+    }
+     if (key == Settings.feelKeyUC || key == Settings.feelKeyLC) {
+        game.level.player.feelOn=!game.level.player.feelOn;
+    }
 
     // DEBUG: re-generate level
-    if (key == 'r') {
+    if (key == 'r' || key=='R') {
         game.level.generateLevel();
     }
 }

@@ -12,9 +12,11 @@ void setup() {
     noStroke();
     // noSmooth();
     ellipseMode(CORNER);
-
+    audioLoad();
+    
     menu.load();
     game.load();
+    imgLoad();
     state = menu;
 }
 
