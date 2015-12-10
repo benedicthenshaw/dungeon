@@ -7,20 +7,30 @@ class Tile {
     // enemy, player, etc. on this tile
     Dynamic dyn;
 
-    // TODO: fog of war style visibility?
-    // boolean seen;
+    //visible checks if a tile is in sight range, unknown checks if a tile has been seen before and feelable checks if a tile is in hearing range
     boolean visible;
+    boolean unknown;
+    boolean feelable;
+    //maxFeels determines for how long a blip will stay in place.
+    float feels;
+    float maxFeels=3;
 
     Tile() {
         this.item = null;
         this.dyn = null;
         this.visible = false;
+        this.feels = 0;
+        this.feelable = false;
+        this.unknown = true;
     }
 
     Tile(Item item, Dynamic dyn) {
         this.item = item;
         this.dyn = dyn;
         this.visible = false;
+        this.feels = 0;
+        this.feelable = false;
+        this.unknown = true;
     }
 
     // copy contents to new tile
@@ -28,6 +38,9 @@ class Tile {
         this.item = t.item;
         this.dyn = t.dyn;
         this.visible = false;
+        this.feels = 0;
+        this.feelable = false;
+        this.unknown = true;
     }
 
     // called when entity attempts to walk onto tile
@@ -38,6 +51,12 @@ class Tile {
 
     boolean onExit(Dynamic d) {
         this.dyn = null;
+
+        // creates a sound blip on movement
+        if (this.feelable) {
+            this.feels=this.maxFeels;
+        }
+
         return true;
     }
 
@@ -45,7 +64,11 @@ class Tile {
     // return false when nothing occured
     boolean onInteract(Dynamic d) {
         if (this.item != null) {
-            this.item = d.equip((Weapon) this.item);
+            if (!(this.item instanceof HealthPotion)) {
+                this.item = d.equip((Weapon) this.item);
+            } else {
+                this.item.onUse(dyn);
+            }
             return true;
         } else {
             return false;
@@ -55,6 +78,20 @@ class Tile {
     void draw(int x, int y, int size) {
         if (this.visible) {
             this.drawTile(x, y, size);
+        } else {
+            if (!this.unknown) {
+                //draws a faded tile if it is known but not visible
+                tint(255, 122);
+                this.drawTile(x, y, size);
+                tint(255, 255);
+            }
+
+            if (this.feels > 0) {
+                // draws a sound blip where needed in a non-visible tile
+                tint(255, 255 * (this.feels/this.maxFeels));
+                imgRender(imgBlip, x, y);
+                tint(255, 255);
+            }
         }
     }
 
@@ -67,7 +104,8 @@ class Tile {
         if (this.item != null) {
             this.item.draw(x+1, y+1, size-2);
         }
-        if (this.dyn != null) {
+
+        if (this.dyn != null&&this.visible) {
             this.dyn.draw(x+1, y+1, size-2);
         }
     }
@@ -78,7 +116,7 @@ class Tile {
 class Floor extends Tile {
     // move to tile if empty
     boolean onEnter(Dynamic d) {
-        if (this.dyn == null){
+        if (this.dyn == null) {
             this.dyn = d;
             return true;
         } else {
@@ -91,8 +129,9 @@ class Floor extends Tile {
 
 class StoneFloor extends Floor {
     void drawTile(int x, int y, int size) {
-        fill(81, 81, 81);
-        rect(x, y, size, size);
+        //fill(255, 81, 81);
+        //rect(x, y, size, size);
+        imgRender(tileWood, x, y);
         this.drawContents(x, y, size);
     }
 }
@@ -100,7 +139,7 @@ class StoneFloor extends Floor {
 class TrapDoor extends Floor {
     boolean onEnter(Dynamic d) {
         if (d instanceof Player) {
-            game.level.generateLevel();
+            game.level.generateLevel((Player)d);
         }
         return false;
     }

@@ -42,6 +42,7 @@ class Grid {
         if (tileInBounds(x, y)) {
             if (this.data[x][y] != null) {
                 this.data[x][y].item = i;
+                this.data[x][y].item.tile = this.data[x][y];
             }
         }
     }
@@ -80,19 +81,55 @@ class Grid {
                     // TODO: track visibility better than 'check if wall'
                     if (!(this.data[i][j] instanceof Wall))
                         this.data[i][j].visible = false;
+                    this.data[i][j].feelable = false;
                 }
             }
         }
 
-        // find tiles in a circle around (x, y)
-        for (int i = x - r; i < x + r+1; i++) {
-            for (int j = y - r; j < y + r+1; j++) {
-                double distSq = ((i - x) * (i - x)) +
-                                ((j - y) * (j - y));
-                if (distSq <= r*r) {
-                    if (this.tileInBounds(i, j)) {
-                        if (this.data[i][j] != null) {
-                            this.data[i][j].visible = true;
+        if (game.level.player.sightOn) {
+            // find tiles in a circle around (x, y)
+            for (int i = x - r; i < x + r+1; i++) {
+                for (int j = y - r; j < y + r+1; j++) {
+                    double distSq = ((i - x) * (i - x)) + ((j - y) * (j - y));
+                    if (distSq <= r*r) {
+                        if (this.tileInBounds(i, j)) {
+                            if (this.data[i][j] != null) {
+                                this.data[i][j].visible = true;
+                                this.data[i][j].unknown = false;
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            this.data[x][y].visible=true;
+            this.data[x][y].unknown = false;
+        }
+    }
+
+    void performFeel(int x, int y, int r) {
+        // makes blips fade away by performing feels
+        for (int i = 0; i < this.width; i++) {
+            for (int j = 0; j < this.height; j++) {
+                if (this.data[i][j] != null) {
+                    if (!(this.data[i][j] instanceof Wall))
+                        if (this.data[i][j].feels>0)
+                            this.data[i][j].feels--;
+                    }
+                }
+        }
+        // checks if a tile is close enough to be "heard"
+        if (game.level.player.feelOn) {
+            for (int i = x - r; i < x + r+1; i++) {
+                for (int j = y - r; j < y + r+1; j++) {
+                    double distSq = ((i - x) * (i - x)) + ((j - y) * (j - y));
+                    if (distSq <= r*r) {
+                        if (this.tileInBounds(i, j)) {
+                            if (this.data[i][j] != null) {
+                                if (this.data[i][j].dyn != null) {
+                                    this.data[i][j].feelable=true;
+                                }
+                            }
                         }
                     }
                 }
@@ -108,13 +145,6 @@ class Grid {
                        y * this.tileSize + gridOffsetY,
                        this.tileSize);
             }
-            // DEBUG: draw grid lines
-            // stroke(0, 0, 0, 50);
-            // noFill();
-            // rect(x * this.tileSize + gridOffsetX,
-            //      y * this.tileSize + gridOffsetY,
-            //      this.tileSize, this.tileSize);
-            // noStroke();
         }
     }
 
@@ -123,6 +153,17 @@ class Grid {
         for (int x = 0; x < this.width; x++) {
             for (int y = 0; y < this.height; y++) {
                 this.drawTile(x, y, this.data[x][y]);
+            }
+        }
+        //draws frames for all items
+        for (int x = 0; x < this.width; x++) {
+            for (int y = 0; y < this.height; y++) {
+                if (this.data[x][y]!=null) {
+                    if ((this.data[x][y].item != null) &&
+                        (this.data[x][y].visible == true)) {
+                        imgRender(imgFrame, x*tileSize-1, y*tileSize-1);
+                    }
+                }
             }
         }
     }

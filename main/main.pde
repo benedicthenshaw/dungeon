@@ -5,16 +5,17 @@ Game game = new Game();
 GameState state = null;
 
 void setup() {
-    // fullScreen();
-    // DEBUG: windowed
     size(1280, 720);
     pixelDensity(displayDensity());
     noStroke();
-    // noSmooth();
+    noSmooth();
     ellipseMode(CORNER);
+    audioLoad();
 
     menu.load();
     game.load();
+    imgLoad();
+
     state = menu;
 }
 

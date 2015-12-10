@@ -4,18 +4,20 @@
 class Level {
     Grid grid;
     ArrayList<Enemy> enemies;
+    ArrayList<Peaceful> peacefuls;
     Player player;
 
     Level(int gridWidth, int gridHeight, int screenWidth, int screenHeight) {
         this.grid = new Grid(gridWidth, gridHeight, screenWidth, screenHeight);
         this.enemies = new ArrayList<Enemy>();
+        this.peacefuls = new ArrayList<Peaceful>();
         this.player = null;
     }
 
     // fill grid with random level
     void generateLevel() {
         this.destroy();
-        switch (round(random(0, 2))) {
+        switch (floor(random(0, 3))) {
             case 0: {
                 this.generateOpenLevel();
             } break;
@@ -30,15 +32,39 @@ class Level {
         }
     }
 
+    // fill grid with random level
+    void generateLevel(Player p) {
+        this.destroy();
+        switch (floor(random(0, 3))) {
+            case 0: {
+                this.generateOpenLevel();
+            } break;
+
+            case 1: {
+                this.generateVerticalLevel();
+            } break;
+
+            case 2: {
+                this.generateHorizontalLevel();
+            } break;
+        }
+
+        // remove randomly generated player, replace with given player
+        this.grid.data[this.player.x][this.player.y].dyn = null;
+        this.player = null;
+        randomlyPlacePlayer(p);
+    }
+
+
     void generateHorizontalLevel() {
-        int rooms = round(random(3, 6));
+        int rooms = round(random(3, 5));
 
         int roomSpacing = 3;
         int roomWidth = this.grid.width - 4;
         int roomHeight = this.grid.height / rooms - roomSpacing;
 
         int roomStartY = 1 + (this.grid.height - rooms *
-                              (roomHeight + roomSpacing)) / 2;
+            (roomHeight + roomSpacing)) / 2;
         int roomX = 2;
         int roomY = roomStartY;
 
@@ -51,6 +77,13 @@ class Level {
                 int pathY = roomY + (roomHeight-1);
                 int pathLength = roomSpacing + 1;
                 this.placePathLine(pathX, pathY, pathX, pathY + pathLength);
+                // 50% chance to place a second corridor
+                if (floor(random(0, 2)) == 1) {
+                    pathX = round(random(roomX + 1, roomWidth - 1));
+                    pathY = roomY + (roomHeight-1);
+                    pathLength = roomSpacing + 1;
+                    this.placePathLine(pathX, pathY, pathX, pathY + pathLength);
+                }
             }
         }
 
@@ -77,6 +110,13 @@ class Level {
                 int pathY = round(random(roomY + 1, roomHeight - 1));
                 int pathLength = roomSpacing + 1;
                 this.placePathLine(pathX, pathY, pathX + pathLength, pathY);
+                // 50% chance to place a second corridor
+                if (floor(random(0, 2)) == 1) {
+                    pathX = roomX + (roomWidth-1);
+                    pathY = round(random(roomY + 1, roomHeight - 1));
+                    pathLength = roomSpacing + 1;
+                    this.placePathLine(pathX, pathY, pathX + pathLength, pathY);
+                }
             }
         }
 
@@ -84,14 +124,26 @@ class Level {
     }
 
     void generateOpenLevel() {
-        this.createRoom(0, 0, this.grid.width,this.grid.height);
+        int pillars = round(random(20, 30));
+        int roomSize = round(random(8, 14));
+
+        this.createRoom(0, 0, this.grid.width, this.grid.height);
+
+        for (int i = 0; i < pillars; i++) {
+            int x = round(random(roomSize, this.grid.width - roomSize));
+            int y = round(random(roomSize, this.grid.height - roomSize));
+            this.grid.data[x][y] = null;
+            this.grid.setTile(x, y, new StoneWall());
+        }
+
         this.randomlyPlaceEntities();
     }
 
     void randomlyPlaceEntities() {
         randomlyPlacePlayer();
-        randomlyPlaceEnemies(round(random(20, 50)));
-        randomlyPlaceItems(50);
+        randomlyPlaceEnemies(round(random(10, 25)));
+        randomlyPlacePeacefuls(round(random(0, 5)));
+        randomlyPlaceItems(round(random(5, 15)));
         randomlyPlaceTrapDoor();
     }
 
@@ -102,9 +154,24 @@ class Level {
         while (!found) {
             int x = round(random(1, this.grid.width-1));
             int y = round(random(1, this.grid.height-1));
+
             if (this.grid.data[x][y] != null &&
                 this.grid.data[x][y] instanceof Floor) {
-                this.placePlayer(x, y, new Player(20, 1));
+                this.placePlayer(x, y, new Player(25, 1));
+                found = true;
+            }
+        }
+    }
+
+    void randomlyPlacePlayer(Player p) {
+        boolean found = false;
+        while (!found) {
+            int x = round(random(1, this.grid.width-1));
+            int y = round(random(1, this.grid.height-1));
+
+            if (this.grid.data[x][y] != null &&
+                this.grid.data[x][y] instanceof Floor) {
+                this.placePlayer(x, y, new Player(p));
                 found = true;
             }
         }
@@ -113,11 +180,12 @@ class Level {
     // TODO: major optimisation
     // TODO: stats are hard-coded here; change that!
     void randomlyPlaceEnemies(int n) {
-        for ( ; n > 0; n--) {
+        for (; n > 0; n--) {
             boolean found = false;
             while (!found) {
                 int x = round(random(1, this.grid.width-1));
                 int y = round(random(1, this.grid.height-1));
+
                 if (this.grid.data[x][y] != null &&
                     this.grid.data[x][y] instanceof Floor) {
                     this.placeEnemy(x, y, new Enemy(10, 1));
@@ -127,10 +195,26 @@ class Level {
         }
     }
 
+    void randomlyPlacePeacefuls(int n) {
+        for (; n > 0; n--) {
+            boolean found = false;
+            while (!found) {
+                int x = round(random(1, this.grid.width-1));
+                int y = round(random(1, this.grid.height-1));
+
+                if (this.grid.data[x][y] != null &&
+                    this.grid.data[x][y] instanceof Floor) {
+                    this.placePeaceful(x, y, new Peaceful(5, 0));
+                    found = true;
+                }
+            }
+        }
+    }
+
     // TODO: place items based on level difficulty
     // TODO: stats are hard-coded here; change that!
     void randomlyPlaceItems(int n) {
-        for ( ; n > 0; n--) {
+        for (; n > 0; n--) {
             boolean found = false;
             while (!found) {
                 int x = round(random(1, this.grid.width-1));
@@ -138,15 +222,20 @@ class Level {
                 if (this.grid.data[x][y] != null &&
                     this.grid.data[x][y] instanceof Floor) {
                     // TODO: better item picking?
-                    switch (floor(random(0, 2))) {
+                    switch (round(random(0, 2))) {
                         case 0: {
-                            this.placeItem(x, y, new Sword(5));
+                            this.placeItem(x, y, new Sword(floor(random(3, 7))));
                         } break;
 
                         case 1: {
-                            this.placeItem(x, y, new Axe(10));
+                            this.placeItem(x, y, new Axe(floor(random(5, 12))));
+                        } break;
+
+                        case 2: {
+                            this.placeItem(x, y, new HealthPotion(floor(random(5, 15))));
                         } break;
                     }
+
                     found = true;
                 }
             }
@@ -172,10 +261,11 @@ class Level {
         for (int i = 0; i < this.grid.width; i++) {
             for (int j = 0; j < this.grid.height; j++) {
                 this.grid.data[i][j] = null;
-                this.enemies = new ArrayList<Enemy>();
-                this.player = null;
             }
         }
+        this.enemies = new ArrayList<Enemy>();
+        this.peacefuls = new ArrayList<Peaceful>();
+        this.player = null;
     }
 
     // TODO: get tile type from parameters
@@ -209,6 +299,7 @@ class Level {
     void placePathStep(int x, int y, boolean horizontal) {
         // TODO: paths need walls
         this.grid.setTile(x, y, new StoneFloor());
+
         if (horizontal) {
             this.grid.setTile(x, y - 1, new StoneWall());
             this.grid.setTile(x, y + 1, new StoneWall());
@@ -249,23 +340,56 @@ class Level {
         this.grid.placeDynamic(x, y, d);
     }
 
+    void placePeaceful(int x, int y, Peaceful d) {
+        d.x = x;
+        d.y = y;
+        this.peacefuls.add(d);
+        this.grid.placeDynamic(x, y, d);
+    }
+
     void placePlayer(int x, int y, Player p) {
         p.x = x;
         p.y = y;
         this.player = p;
         this.grid.placeDynamic(x, y, p);
-        this.grid.makeAreaVisible(x, y, p.sightDistance);
+        // this.grid.makeAreaVisible(x, y, p.sightDistance);
     }
 
     // carry out tasks that cause changes to the level
     // takes a player action; occurs on key press
-    void performTurn(actions a) {
+    void performTurn(Action a) {
         // status update
         for (int i = this.enemies.size()-1; i >= 0; i--) {
             Enemy e = this.enemies.get(i);
             if (e.health <= 0) {
                 this.grid.data[e.x][e.y].dyn = null;
                 this.enemies.remove(e);
+
+                // 33% chance to drop something
+                if (floor(random(0, 3)) == 0) {
+                    switch (round(random(0, 2))) {
+                        case 0: {
+                            this.placeItem(e.x, e.y, new Sword(floor(random(3, 7))));
+                        } break;
+
+                        case 1: {
+                            this.placeItem(e.x, e.y, new Axe(floor(random(5, 12))));
+                        } break;
+
+                        case 2: {
+                            this.placeItem(e.x, e.y, new HealthPotion(floor(random(5, 15))));
+                        } break;
+                    }
+                }
+            }
+        }
+
+        // status update
+        for (int i = this.peacefuls.size()-1; i >= 0; i--) {
+            Peaceful p = this.peacefuls.get(i);
+            if (p.health <= 0) {
+                this.grid.data[p.x][p.y].dyn = null;
+                this.peacefuls.remove(p);
             }
         }
 
@@ -275,6 +399,11 @@ class Level {
         // enemy turns
         for (Enemy e : this.enemies) {
             e.takeTurn(this);
+        }
+
+        // peaceful turns
+        for (Peaceful p : this.peacefuls) {
+            p.takeTurn(this);
         }
     }
 

@@ -12,4 +12,9 @@ static class Settings {
     static int leftKey = LEFT;
     static int rightKey = RIGHT;
     static int interactKey = ' ';
+    static int restartKey = 'r';
+    static int sightKeyUC = 'Z';
+    static int sightKeyLC = 'z';
+    static int feelKeyUC = 'X';
+    static int feelKeyLC = 'x';
 }

@@ -9,6 +9,9 @@ class Dynamic {
     int damage;
     Weapon weapon;
 
+    // used to avoid Processing bug
+    Dynamic() {}
+
     Dynamic(int x, int y, int health, int damage) {
         this.x = x;
         this.y = y;
@@ -26,7 +29,7 @@ class Dynamic {
         this.damage = damage;
     }
 
-    // performs actions required each turn (overloaded in subclass)
+    // performs actions required each turn
     void takeTurn() {}
 
     // move entity to given point in grid
@@ -50,8 +53,7 @@ class Dynamic {
         }
     }
 
-    // NOTE: weapons are dropped on equip;
-    //       store in inventory instead?
+    // NOTE: old weapon is dropped on equip
     Weapon equip(Weapon w) {
         Weapon temp = this.weapon;
         this.weapon = w;
@@ -63,6 +65,6 @@ class Dynamic {
         this.move(this.x + x, this.y + y, g);
     }
 
-    // display dynamic entity (overloaded in subclass)
+    // display dynamic entity
     void draw(int x, int y, int size) {}
 }

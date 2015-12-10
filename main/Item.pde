@@ -2,8 +2,9 @@
 
 // superclass for items
 class Item {
+    Tile tile;
     // called when item is used inside inventory
-    void onUse(Player p) {}
+    void onUse(Dynamic d) {}
 
     void draw(int x, int y, int size) {}
 }
@@ -24,13 +25,27 @@ class LootBag extends Item {
 class Consumable extends Item {}
 
 class HealthPotion extends Item {
-    void onUse(Player p) {
-        p.health += 1;
+    int heal;
+
+    HealthPotion(int heal) {
+        this.heal = heal;
+    }
+
+    void onUse(Dynamic d) {
+        if (d.health <= d.maxHealth - heal) {
+            d.health += this.heal;
+        } else {
+            d.health = d.maxHealth;
+        }
+        tile.item = null;
+        createParticles(prt1, game.level.player.x * game.level.grid.tileSize,
+                        game.level.player.y * game.level.grid.tileSize);
     }
 
     void draw(int x, int y, int size) {
-        fill(102, 153, 204);
-        ellipse(x + size/4, y + size/4, size/2, size/2);
+        //fill(102, 153, 204);
+        //ellipse(x + size/4, y + size/4, size/2, size/2);
+        imgRender(imgPotion, x, y);
     }
 }
 
@@ -59,9 +74,9 @@ class Sword extends Weapon {
     }
 
     void draw(int x, int y, int size) {
-        //TODO: sword graphic
-        fill(204, 153, 204);
-        ellipse(x + size/4, y + size/4, 2*size/3, 2*size/3);
+        //fill(204, 153, 204);
+        //ellipse(x + size/4, y + size/4, 2*size/3, 2*size/3);
+        imgRender(imgSword, x, y);
     }
 }
 
@@ -71,11 +86,11 @@ class Axe extends Weapon {
     }
 
     void draw(int x, int y, int size) {
-        //TODO: axe graphic
-        fill(204, 153, 204);
+        imgRender(imgAxe, x, y);
+        /*fill(204, 153, 204);
         quad(x + size/2, y,
-             x + size, y + size/2,
-             x + size/2, y + size,
-             x, y + size/2);
+        x + size, y + size/2,
+        x + size/2, y + size,
+        x, y + size/2);*/
     }
 }
