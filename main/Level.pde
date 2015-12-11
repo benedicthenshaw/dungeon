@@ -222,7 +222,7 @@ class Level {
                 if (this.grid.data[x][y] != null &&
                     this.grid.data[x][y] instanceof Floor) {
                     // TODO: better item picking?
-                    switch (round(random(0, 2))) {
+                    switch (round(random(0, 5))) {
                         case 0: {
                             this.placeItem(x, y, new Sword(floor(random(3, 7))));
                         } break;
@@ -375,7 +375,7 @@ class Level {
 
                 // 33% chance to drop something
                 if (floor(random(0, 3)) == 0) {
-                    switch (round(random(0, 2))) {
+                    switch (round(random(0, 5))) {
                         case 0: {
                             this.placeItem(e.x, e.y, new Sword(floor(random(3, 7))));
                         } break;
