@@ -74,8 +74,6 @@ class Sword extends Weapon {
     }
 
     void draw(int x, int y, int size) {
-        //fill(204, 153, 204);
-        //ellipse(x + size/4, y + size/4, 2*size/3, 2*size/3);
         imgRender(imgSword, x, y);
     }
 }
@@ -87,10 +85,25 @@ class Axe extends Weapon {
 
     void draw(int x, int y, int size) {
         imgRender(imgAxe, x, y);
-        /*fill(204, 153, 204);
-        quad(x + size/2, y,
-        x + size, y + size/2,
-        x + size/2, y + size,
-        x, y + size/2);*/
+    }
+}
+
+class Hammer extends Weapon {
+    Hammer(int damage) {
+        super(damage);
+    }
+
+    void draw(int x, int y, int size) {
+        imgRender(imgHammer, x, y);
+    }
+}
+
+class Pickaxe extends Weapon {
+    Pickaxe(int damage) {
+        super(damage);
+    }
+
+    void draw(int x, int y, int size) {
+        imgRender(imgPickaxe, x, y);
     }
 }

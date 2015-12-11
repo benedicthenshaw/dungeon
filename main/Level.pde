@@ -232,6 +232,14 @@ class Level {
                         } break;
 
                         case 2: {
+                            this.placeItem(x, y, new Hammer(floor(random(8, 10))));
+                        } break;
+
+                        case 3: {
+                            this.placeItem(x, y, new Pickaxe(floor(random(1, 4))));
+                        } break;
+
+                        case 4: {
                             this.placeItem(x, y, new HealthPotion(floor(random(5, 15))));
                         } break;
                     }
@@ -377,6 +385,14 @@ class Level {
                         } break;
 
                         case 2: {
+                            this.placeItem(e.x, e.y, new Hammer(floor(random(8, 10))));
+                        } break;
+
+                        case 3: {
+                            this.placeItem(e.x, e.y, new Pickaxe(floor(random(1, 4))));
+                        } break;
+
+                        case 4: {
                             this.placeItem(e.x, e.y, new HealthPotion(floor(random(5, 15))));
                         } break;
                     }

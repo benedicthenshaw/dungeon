@@ -23,7 +23,7 @@ class Menu extends GameState {
         this.font = createFont("Quicksand-Light.ttf", 64);
         this.arrowFont = createFont("Arial", 64);
         textFont(this.font);
-        
+
     }
 
     void update() {
@@ -222,6 +222,16 @@ class Game extends GameState {
             if (this.level.player.weapon instanceof Axe) {
                 imgRender(imgFrame, width-imgFrame.width*4, 0, 4);
                 imgRender(imgAxe, width-imgAxe.width*4-8, 8, 4);
+            }
+
+            if (this.level.player.weapon instanceof Hammer) {
+                imgRender(imgFrame, width-imgFrame.width*4, 0, 4);
+                imgRender(imgHammer, width-imgAxe.width*4-8, 8, 4);
+            }
+
+            if (this.level.player.weapon instanceof Pickaxe) {
+                imgRender(imgFrame, width-imgFrame.width*4, 0, 4);
+                imgRender(imgPickaxe, width-imgAxe.width*4-8, 8, 4);
             }
         }
 
