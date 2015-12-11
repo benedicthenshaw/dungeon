@@ -23,7 +23,7 @@ class Menu extends GameState {
         this.font = createFont("Quicksand-Light.ttf", 64);
         this.arrowFont = createFont("Arial", 64);
         textFont(this.font);
-        smooth();
+        
     }
 
     void update() {

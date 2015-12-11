@@ -8,10 +8,10 @@ void setup() {
     size(1280, 720);
     pixelDensity(displayDensity());
     noStroke();
-    noSmooth();
     ellipseMode(CORNER);
     audioLoad();
-
+    
+    smooth();
     menu.load();
     game.load();
     imgLoad();
