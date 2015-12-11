@@ -5,13 +5,12 @@ Game game = new Game();
 GameState state = null;
 
 void setup() {
-    size(1280, 720);
+    size(1280, 720, P3D);
     pixelDensity(displayDensity());
     noStroke();
     ellipseMode(CORNER);
     audioLoad();
-    
-    smooth();
+
     menu.load();
     game.load();
     imgLoad();
