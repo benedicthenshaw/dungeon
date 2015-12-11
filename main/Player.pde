@@ -52,6 +52,7 @@ class Player extends Dynamic {
     int attack() {
         game.shake = true;
         game.shakeTime = millis();
+        hit.trigger();
         return super.attack();
     }
 
