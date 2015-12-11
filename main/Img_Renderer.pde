@@ -1,20 +1,26 @@
 //Image renderer/resizer for all sprites used. Images are drawn from the left top corner.
 
 
-PImage imgPotion, imgFrame, imgBlip, tileWood, imgSword, imgPickaxe, imgAxe, imgHammer, prt1 = null;
+PImage imgPotion, imgFrame, imgBlip,
+       tileWood, imgSword, imgPickaxe,
+       imgAxe, imgHammer, imgDagger,
+       imgMace, imgSpear, prt1 = null;
 int wpnImgCount = 0;
 PImage[] wpnImg;
 
 void imgLoad() {
-    imgFrame=loadImage("FrameTR.png");
-    imgPotion=loadImage("Potion.png");
-    imgSword=loadImage("Sword.png");
-    imgAxe=loadImage("Axe.png");
-    imgHammer=loadImage("Hammer.png");
-    imgPickaxe=loadImage("Pickaxe.png");
-    tileWood=loadImage("Wood_tile.png");
-    imgBlip=loadImage("Blip.png");
-    prt1=loadImage("HealSFX.png");
+    imgFrame = loadImage("FrameTR.png");
+    imgPotion = loadImage("Potion.png");
+    imgSword = loadImage("Sword.png");
+    imgAxe = loadImage("Axe.png");
+    imgHammer = loadImage("Hammer.png");
+    imgPickaxe = loadImage("Pickaxe.png");
+    imgDagger = loadImage("Dagger.png");
+    imgMace = loadImage("Mace.png");
+    imgSpear = loadImage("Spear.png");
+    tileWood = loadImage("Wood_tile.png");
+    imgBlip = loadImage("Blip.png");
+    prt1 = loadImage("HealSFX.png");
 
     //file read system
     /*String lines[] = loadStrings("Items.txt");

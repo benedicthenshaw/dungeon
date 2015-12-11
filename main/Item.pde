@@ -107,3 +107,33 @@ class Pickaxe extends Weapon {
         imgRender(imgPickaxe, x, y);
     }
 }
+
+class Dagger extends Weapon {
+    Dagger(int damage) {
+        super(damage);
+    }
+
+    void draw(int x, int y, int size) {
+        imgRender(imgDagger, x, y);
+    }
+}
+
+class Mace extends Weapon {
+    Mace(int damage) {
+        super(damage);
+    }
+
+    void draw(int x, int y, int size) {
+        imgRender(imgMace, x, y);
+    }
+}
+
+class Spear extends Weapon {
+    Spear(int damage) {
+        super(damage);
+    }
+
+    void draw(int x, int y, int size) {
+        imgRender(imgSpear, x, y);
+    }
+}

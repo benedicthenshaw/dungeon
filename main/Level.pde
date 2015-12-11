@@ -222,13 +222,13 @@ class Level {
                 if (this.grid.data[x][y] != null &&
                     this.grid.data[x][y] instanceof Floor) {
                     // TODO: better item picking?
-                    switch (round(random(0, 5))) {
+                    switch (round(random(0, 8))) {
                         case 0: {
                             this.placeItem(x, y, new Sword(floor(random(3, 7))));
                         } break;
 
                         case 1: {
-                            this.placeItem(x, y, new Axe(floor(random(5, 12))));
+                            this.placeItem(x, y, new Axe(floor(random(5, 8))));
                         } break;
 
                         case 2: {
@@ -236,10 +236,22 @@ class Level {
                         } break;
 
                         case 3: {
-                            this.placeItem(x, y, new Pickaxe(floor(random(1, 4))));
+                            this.placeItem(x, y, new Pickaxe(floor(random(2, 4))));
                         } break;
 
                         case 4: {
+                            this.placeItem(x, y, new Dagger(floor(random(1, 3))));
+                        } break;
+
+                        case 5: {
+                            this.placeItem(x, y, new Mace(floor(random(3, 6))));
+                        } break;
+
+                        case 6: {
+                            this.placeItem(x, y, new Spear(floor(random(5, 6))));
+                        } break;
+
+                        case 7: {
                             this.placeItem(x, y, new HealthPotion(floor(random(5, 15))));
                         } break;
                     }
@@ -375,13 +387,13 @@ class Level {
 
                 // 33% chance to drop something
                 if (floor(random(0, 3)) == 0) {
-                    switch (round(random(0, 5))) {
+                    switch (round(random(0, 8))) {
                         case 0: {
                             this.placeItem(e.x, e.y, new Sword(floor(random(3, 7))));
                         } break;
 
                         case 1: {
-                            this.placeItem(e.x, e.y, new Axe(floor(random(5, 12))));
+                            this.placeItem(e.x, e.y, new Axe(floor(random(5, 8))));
                         } break;
 
                         case 2: {
@@ -389,10 +401,22 @@ class Level {
                         } break;
 
                         case 3: {
-                            this.placeItem(e.x, e.y, new Pickaxe(floor(random(1, 4))));
+                            this.placeItem(e.x, e.y, new Pickaxe(floor(random(2, 4))));
                         } break;
 
                         case 4: {
+                            this.placeItem(e.x, e.y, new Dagger(floor(random(1, 3))));
+                        } break;
+
+                        case 5: {
+                            this.placeItem(e.x, e.y, new Mace(floor(random(3, 6))));
+                        } break;
+
+                        case 6: {
+                            this.placeItem(e.x, e.y, new Spear(floor(random(5, 6))));
+                        } break;
+
+                        case 7: {
                             this.placeItem(e.x, e.y, new HealthPotion(floor(random(5, 15))));
                         } break;
                     }

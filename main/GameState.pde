@@ -233,6 +233,21 @@ class Game extends GameState {
                 imgRender(imgFrame, width-imgFrame.width*4, 0, 4);
                 imgRender(imgPickaxe, width-imgAxe.width*4-8, 8, 4);
             }
+
+            if (this.level.player.weapon instanceof Dagger) {
+                imgRender(imgFrame, width-imgFrame.width*4, 0, 4);
+                imgRender(imgDagger, width-imgAxe.width*4-8, 8, 4);
+            }
+
+            if (this.level.player.weapon instanceof Mace) {
+                imgRender(imgFrame, width-imgFrame.width*4, 0, 4);
+                imgRender(imgMace, width-imgAxe.width*4-8, 8, 4);
+            }
+
+            if (this.level.player.weapon instanceof Spear) {
+                imgRender(imgFrame, width-imgFrame.width*4, 0, 4);
+                imgRender(imgSpear, width-imgAxe.width*4-8, 8, 4);
+            }
         }
 
         if (this.level.player.health <= 0) {
